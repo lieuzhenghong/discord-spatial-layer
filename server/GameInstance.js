@@ -122,6 +122,11 @@ class GameInstance {
                         this.instance.addLocalMessage(new WeaponFired(entity.nid, entity.x, entity.y, command.x, command.y))
                     }
                 }
+
+                if (command.protocol.name === 'MoodCommand') {
+                    // TODO implement change mood
+                    entity.processMood(command)
+                }
             }
         }
 

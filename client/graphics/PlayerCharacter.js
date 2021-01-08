@@ -81,7 +81,33 @@ class PlayerCharacter extends PIXI.Container {
     }
 
     update(delta) {
-        this.rotation = 0
+        // this.rotation = 0
+        this.moodFace && this.removeChild(this.moodFace)
+        // let playerNameText;
+        let sprite;
+
+        if (this.mood === "neutral") {
+            sprite = new PIXI.Sprite.from(CONFIG.NEUTRAL_FACE);
+        }
+        else if (this.mood === "happy") {
+            sprite = new PIXI.Sprite.from(CONFIG.HAPPY_FACE);
+        }
+        else if (this.mood === "kissy") {
+            sprite = new PIXI.Sprite.from(CONFIG.KISSY_FACE);
+        }
+        else if (this.mood === "sad") {
+            sprite = new PIXI.Sprite.from(CONFIG.CRYING_FACE);
+        }
+        else if (this.mood === "angry") {
+            sprite = new PIXI.Sprite.from(CONFIG.ANGRY_FACE);
+        }
+
+        console.log(this.mood)
+        sprite.width = 60
+        sprite.height = 60
+        sprite.anchor.set(0.5)
+        this.moodFace = sprite
+        this.addChild(this.moodFace)
     }
 }
 

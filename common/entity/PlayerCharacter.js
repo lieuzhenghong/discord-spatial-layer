@@ -7,6 +7,7 @@ class PlayerCharacter {
     constructor({ name }) {
         this.x = 0
         this.y = 0
+        this.mood = "neutral"
 
         this.moveDirection = {
             x: 0,
@@ -60,6 +61,10 @@ class PlayerCharacter {
         this.moveDirection.y = unitY
     }
 
+    processMood(command) {
+        this.mood = command.mood
+    }
+
     move(delta) {
         this.x += this.moveDirection.x * this.speed * delta
         this.x = Math.max(0, this.x)
@@ -80,6 +85,7 @@ PlayerCharacter.protocol = {
     hitpoints: nengi.UInt8,
     name: nengi.String,
     message: nengi.String,
+    mood: nengi.String,
 }
 
 export default PlayerCharacter
