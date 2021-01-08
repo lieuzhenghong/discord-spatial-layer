@@ -1,5 +1,5 @@
 {
-  "name": "Chrome Extension Webpack",
+  "name": "Discord Spatial Layer",
   "version": "1.0",
   "manifest_version": 2,
   "background": {
