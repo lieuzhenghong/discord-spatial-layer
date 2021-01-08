@@ -5,6 +5,8 @@ import MoveCommand from '../common/command/MoveCommand'
 import FireCommand from '../common/command/FireCommand'
 import PIXIRenderer from './graphics/PIXIRenderer'
 
+let ALLOW_ROTATION = false
+
 class GameClient {
     constructor() {
         this.client = new nengi.Client(nengiConfig)
@@ -19,7 +21,7 @@ class GameClient {
             console.log('connection closed')
         })
 
-        this.client.connect('ws://localhost:8079')  
+        this.client.connect('ws://localhost:8079')
     }
 
     update(delta, tick, now) {
@@ -62,7 +64,7 @@ class GameClient {
             rotation = Math.atan2(dy, dx)
         }
 
-        this.client.addCommand(new MoveCommand(input.w, input.a, input.s, input.d, rotation, delta))
+        this.client.addCommand(new MoveCommand(input.w, input.a, input.s, input.d, ALLOW_ROTATION ? rotation : 0, delta))
 
         if (input.mouseDown) {
             this.client.addCommand(new FireCommand(worldCoord.x, worldCoord.y))

@@ -1,5 +1,4 @@
 import * as PIXI from 'pixi.js'
-import HitpointBar from './HitpointBar'
 
 class PlayerCharacter extends PIXI.Container {
     constructor(entity) {
@@ -8,13 +7,6 @@ class PlayerCharacter extends PIXI.Container {
         this.y = entity.y
         this.isAlive = entity.isAlive
 
-        this.hitpointBar = new HitpointBar()
-        this.hitpointBar.x = -6
-        this.hitpointBar.y = -20
-        this.hitpointBar.setHitpointPercentage(entity._hitpoints/100)
-
-        this._hitpoints = 0
-        this.hitpoints = entity.hitpoints
         this.rotation = 0 //entity.rotation
 
         this.body = new PIXI.Graphics()
@@ -30,15 +22,18 @@ class PlayerCharacter extends PIXI.Container {
         this.nose.lineTo(40, 0)
         this.nose.lineTo(0, 25)
         this.nose.endFill()
-        
+
         this.addChild(this.nose)
         this.addChild(this.body)
-        this.addChild(this.hitpointBar)
-    }
+        // this.addChild(this.hitpointBar)
 
-    set hitpoints(value) {
-        this._hitpoints = value
-        this.hitpointBar.setHitpointPercentage(value/100)
+        let name = "weineng"
+
+        let playerNameText = new PIXI.Text(name,{fontFamily : 'Arial', fontSize: 15, fill : 0xffffff, align : 'center'});
+        this.playerNameText = playerNameText
+        this.playerNameText.y = 25
+        this.playerNameText.x = -20
+        this.addChild(this.playerNameText)
     }
 
     update(delta) {

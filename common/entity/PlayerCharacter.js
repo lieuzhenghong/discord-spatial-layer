@@ -7,7 +7,6 @@ class PlayerCharacter {
         this.x = 0
         this.y = 0
         this.rotation = 0
-        this.hitpoints = 100
         this.isAlive = true
 
 
@@ -21,26 +20,6 @@ class PlayerCharacter {
         this.weaponSystem = new WeaponSystem()
 
         this.collider = new SAT.Circle(new SAT.Vector(this.x, this.y), 25)
-    }
-
-
-    takeDamage(amount) {
-        if (this.isAlive) {
-            this.hitpoints -= amount
-        }
-
-        if (this.hitpoints <= 0 && this.isAlive) {
-            this.hitpoints = 0
-            this.isAlive = false
-
-            // DEAD! come back to life and teleport to a new spot
-            setTimeout(() => {
-                this.hitpoints = 100
-                this.isAlive = 100
-                this.x = Math.random() * 500
-                this.y = Math.random() * 500
-            }, 1000)
-        }
     }
 
     fire() {
@@ -67,7 +46,7 @@ class PlayerCharacter {
         if (command.left) { unitX -= 1 }
         if (command.right) { unitX += 1 }
 
-        // normalize      
+        // normalize
         const len = Math.sqrt(unitX * unitX + unitY * unitY)
         if (len > 0) {
             unitX = unitX / len
