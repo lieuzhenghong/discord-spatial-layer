@@ -7,7 +7,7 @@ const config = {
     PLAYER_SPEED: 1200,
     PLAYER_CHAT_TIMEOUT: 5000, // 5s
 
-    MAP_IMAGE: './images/bg.png',
+    MAP_IMAGE: 'https://raw.githubusercontent.com/juxd/discord-spatial-layer/master/public/images/bg.png',
 
     NEUTRAL_FACE: './images/tile000.png',
     HAPPY_FACE: './images/tile002.png',

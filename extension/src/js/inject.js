@@ -1,8 +1,4 @@
-import nengiConfig from '../../../common/nengiConfig'
-import main from '../../../client/runClient'
-
-console.log(nengiConfig)
-const SECRET_KEY_FORM_ID = 'secret-key-form'
+import UI from '../../../client/runClient'
 
 let container;
 
@@ -22,45 +18,9 @@ let container;
     container.style.top = '60%'
     container.style.backgroundColor = 'white'
 
-    container.insertAdjacentHTML('beforeend', renderSecretKeyForm())
-
-    // const canvas = document.createElement('canvas');
-    // canvas.id = 'game-canvas';
-    // canvas.style.height = '100%';
-    // canvas.style.width = '100%';
-    // canvas.style.backgroundColor = 'red';
+    const ui = new UI(container);
+    ui.start();
 
     body.appendChild(container)
-    // container.appendChild(canvas)
+
 }())
-
-function renderSecretKeyForm() {
-    return `
-    <form id="${SECRET_KEY_FORM_ID}">
-      <label for="secret-key">Secret Key:</label><br>
-      <input type="text" id="secret-key" name="secret-key"><br>
-      <input type="submit" value="Submit">
-    </form>
-  `
-}
-
-function handleSecretKeyFormSubmit(e) {
-    const secretKey = document.getElementById('secret-key').value
-
-    const canvas = '<canvas id=\'main-canvas\' style="height: 100%; width: 100%"></canvas>'
-    container.innerText = ''
-    container.insertAdjacentHTML('beforeend', canvas)
-
-    main(secretKey)
-}
-
-document.addEventListener('submit', e => {
-    e.preventDefault()
-
-    const form = e.target
-    const formId = form.getAttribute('id')
-
-    if (formId === SECRET_KEY_FORM_ID) {
-        handleSecretKeyFormSubmit(e)
-    }
-}, false)
