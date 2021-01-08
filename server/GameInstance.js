@@ -14,7 +14,7 @@ class GameInstance {
         this.collisionSystem = new CollisionSystem()
         this.instance = new nengi.Instance(nengiConfig, { port: 8079 })
         this.authDatabase = new AuthDatabase()
-        // if (process.env.NODE_ENV === 'development') this.authDatabase.addUserWithSecret({ displayName: 'joe' }, 'MAGIC_VALUE')
+        if (process.env.NODE_ENV === 'development') this.authDatabase.addUserWithSecret({ displayName: 'joe' }, 'MAGIC_VALUE')
         this.instance.onConnect((client, clientData, callback) => {
             const { user } = this.authDatabase.getUser(clientData.fromClient.secret) || { user: undefined }
             if (!user) {
