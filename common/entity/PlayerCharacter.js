@@ -1,6 +1,6 @@
 import nengi from 'nengi'
-import WeaponSystem from '../WeaponSystem'
 import SAT from 'sat'
+import WeaponSystem from '../WeaponSystem'
 
 class PlayerCharacter {
     constructor() {
@@ -9,10 +9,9 @@ class PlayerCharacter {
         this.rotation = 0
         this.isAlive = true
 
-
         this.moveDirection = {
             x: 0,
-            y: 0
+            y: 0,
         }
 
         this.speed = 400
@@ -49,14 +48,12 @@ class PlayerCharacter {
         // normalize
         const len = Math.sqrt(unitX * unitX + unitY * unitY)
         if (len > 0) {
-            unitX = unitX / len
-            unitY = unitY / len
+            unitX /= len
+            unitY /= len
         }
 
         this.moveDirection.x = unitX
         this.moveDirection.y = unitY
-
-
     }
 
     move(delta) {
@@ -73,7 +70,7 @@ PlayerCharacter.protocol = {
     y: { type: nengi.Float32, interp: true },
     rotation: { type: nengi.RotationFloat32, interp: true },
     isAlive: nengi.Boolean,
-    hitpoints: nengi.UInt8
+    hitpoints: nengi.UInt8,
 }
 
 export default PlayerCharacter

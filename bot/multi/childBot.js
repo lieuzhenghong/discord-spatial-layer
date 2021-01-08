@@ -1,16 +1,15 @@
-
 const glue = require('./glue')
+
 const nengi = glue.nengi.default
 const nengiConfig = glue.nengiConfig.default
 const MoveCommand = glue.MoveCommand.default
 
+const protocolMap = new nengi.ProtocolMap(nengiConfig, nengi.metaConfig)
 
-var protocolMap = new nengi.ProtocolMap(nengiConfig, nengi.metaConfig)
+// var address = 'ws://localhost:8001'
+let address = null // 'wss://us-west-3.zombieswithguns.io/6'
 
-//var address = 'ws://localhost:8001'
-var address = null //'wss://us-west-3.zombieswithguns.io/6'
-
-var numberOfBots = 10
+let numberOfBots = 10
 var bots = new Map()
 
 process.on('message', msg => {
@@ -38,7 +37,7 @@ process.on('message', msg => {
     }
 })
 
-process.on('SIGINT', function () {
+process.on('SIGINT', () => {
     console.log('childBot caught interrupt signal, cleaning up websocket')
     bots.forEach(bot => {
         if (bot.websocket) {
@@ -48,10 +47,9 @@ process.on('SIGINT', function () {
     process.exit()
 })
 
-
 var bots = new Map()
 function connectNewBot(id) {
-    let bot = new nengi.Bot(nengiConfig, protocolMap)
+    const bot = new nengi.Bot(nengiConfig, protocolMap)
     bot.id = id
 
     bot.controls = {
@@ -60,7 +58,7 @@ function connectNewBot(id) {
         s: false,
         d: false,
         rotation: 0,
-        delta: 1 / 60
+        delta: 1 / 60,
     }
 
     bot.onConnect(response => {
@@ -80,8 +78,8 @@ function randomBool() {
     return Math.random() > 0.5
 }
 
-var loop = function () {
-    bots.forEach(function botLoop(bot) {
+const loop = function () {
+    bots.forEach(bot => {
         if (bot.websocket) {
             bot.readNetwork()
             // small percent chance of changing which keys are being held down
@@ -93,17 +91,17 @@ var loop = function () {
                     s: randomBool(),
                     d: randomBool(),
                     rotation: Math.random() * Math.PI * 2,
-                    delta: 1 / 60
+                    delta: 1 / 60,
                 }
             }
 
-            var input = new MoveCommand(
+            const input = new MoveCommand(
                 bot.controls.w,
                 bot.controls.a,
                 bot.controls.s,
                 bot.controls.d,
                 bot.controls.rotation,
-                bot.controls.delta
+                bot.controls.delta,
             )
 
             if (Math.random() > 0.7) {
@@ -121,7 +119,3 @@ var loop = function () {
 setTimeout(() => {
     setInterval(loop, 16)
 }, 100)
-
-
-
-

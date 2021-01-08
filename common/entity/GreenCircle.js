@@ -1,5 +1,5 @@
-import nengi from 'nengi';
-import SAT from 'sat';
+import nengi from 'nengi'
+import SAT from 'sat'
 
 class GreenCircle {
     constructor(x, y) {
@@ -15,4 +15,4 @@ GreenCircle.protocol = {
     y: { type: nengi.Float32, interp: false },
 }
 
-export default GreenCircle;
+export default GreenCircle

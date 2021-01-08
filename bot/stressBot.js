@@ -1,6 +1,7 @@
 import nengi from 'nengi'
 import nengiConfig from '../common/nengiConfig'
 import MoveCommand from '../common/command/MoveCommand'
+
 const protocolMap = new nengi.ProtocolMap(nengiConfig, nengi.metaConfig)
 
 const address = 'ws://localhost:8079'
@@ -8,7 +9,7 @@ const numberOfBots = 100
 const bots = new Map()
 
 function connectNewBot(id) {
-    let bot = new nengi.Bot(nengiConfig, protocolMap)
+    const bot = new nengi.Bot(nengiConfig, protocolMap)
     bot.id = id
 
     bot.controls = {
@@ -17,7 +18,7 @@ function connectNewBot(id) {
         s: false,
         d: false,
         rotation: 0,
-        delta: 1 / 60
+        delta: 1 / 60,
     }
 
     bot.onConnect(response => {
@@ -54,7 +55,7 @@ const loop = function () {
                     s: randomBool(),
                     d: randomBool(),
                     rotation: Math.random() * Math.PI * 2,
-                    delta: 1 / 60
+                    delta: 1 / 60,
                 }
             }
 
@@ -64,7 +65,7 @@ const loop = function () {
                 bot.controls.s,
                 bot.controls.d,
                 bot.controls.rotation,
-                bot.controls.delta
+                bot.controls.delta,
             )
 
             if (Math.random() > 0.7) {

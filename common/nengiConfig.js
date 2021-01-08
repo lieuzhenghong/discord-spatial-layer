@@ -9,13 +9,13 @@ import MoveCommand from './command/MoveCommand'
 import FireCommand from './command/FireCommand'
 
 const config = {
-    UPDATE_RATE: 20, 
+    UPDATE_RATE: 20,
 
     ID_BINARY_TYPE: nengi.UInt16,
-    TYPE_BINARY_TYPE: nengi.UInt8, 
+    TYPE_BINARY_TYPE: nengi.UInt8,
 
     ID_PROPERTY_NAME: 'nid',
-    TYPE_PROPERTY_NAME: 'ntype', 
+    TYPE_PROPERTY_NAME: 'ntype',
 
     USE_HISTORIAN: false,
     HISTORIAN_TICKS: 0,
@@ -23,7 +23,7 @@ const config = {
     protocols: {
         entities: [
             ['PlayerCharacter', PlayerCharacter],
-            ['GreenCircle', GreenCircle]
+            ['GreenCircle', GreenCircle],
         ],
 
         localMessages: [],
@@ -34,10 +34,10 @@ const config = {
         ],
         commands: [
             ['MoveCommand', MoveCommand],
-            ['FireCommand', FireCommand]
+            ['FireCommand', FireCommand],
         ],
-        basics: []
-    }
+        basics: [],
+    },
 }
 
 export default config

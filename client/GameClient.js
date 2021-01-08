@@ -5,14 +5,14 @@ import MoveCommand from '../common/command/MoveCommand'
 import FireCommand from '../common/command/FireCommand'
 import PIXIRenderer from './graphics/PIXIRenderer'
 
-let ALLOW_ROTATION = false
+const ALLOW_ROTATION = false
 
 class GameClient {
     constructor(secret) {
         this.client = new nengi.Client(nengiConfig)
         this.renderer = new PIXIRenderer()
         this.input = new InputSystem()
-        this.secret = { "fromClient": { "secret": secret } }
+        this.secret = { fromClient: { secret } }
 
         this.client.onConnect(res => {
             console.log('onConnect response:', res)

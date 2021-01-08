@@ -7,7 +7,7 @@ class PlayerCharacter extends PIXI.Container {
         this.y = entity.y
         this.isAlive = entity.isAlive
 
-        this.rotation = 0 //entity.rotation
+        this.rotation = 0 // entity.rotation
 
         this.body = new PIXI.Graphics()
         this.body.beginFill(0xffffff)
@@ -27,9 +27,11 @@ class PlayerCharacter extends PIXI.Container {
         this.addChild(this.body)
         // this.addChild(this.hitpointBar)
 
-        let name = "weineng"
+        const name = 'weineng'
 
-        let playerNameText = new PIXI.Text(name,{fontFamily : 'Arial', fontSize: 15, fill : 0xffffff, align : 'center'});
+        const playerNameText = new PIXI.Text(name, {
+            fontFamily: 'Arial', fontSize: 15, fill: 0xffffff, align: 'center',
+        })
         this.playerNameText = playerNameText
         this.playerNameText.y = 25
         this.playerNameText.x = -20

@@ -1,10 +1,10 @@
 import GameInstance from './GameInstance'
 import nengiConfig from '../common/nengiConfig'
 
-const gameInstance = new GameInstance(/*args*/)
+const gameInstance = new GameInstance(/* args */)
 
 const hrtimeMs = function () {
-    let time = process.hrtime()
+    const time = process.hrtime()
     return time[0] * 1000 + time[1] / 1000000
 }
 
@@ -22,7 +22,7 @@ const loop = function () {
         // const start = hrtimeMs() // uncomment to benchmark
         gameInstance.update(delta, tick, Date.now())
         // const stop = hrtimeMs()
-        //console.log('game update took', stop-start, 'ms')
+        // console.log('game update took', stop-start, 'ms')
     }
 
     if (hrtimeMs() - previous < tickLengthMs - 4) {

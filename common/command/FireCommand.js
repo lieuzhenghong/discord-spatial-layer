@@ -9,7 +9,7 @@ class FireCommand {
 
 FireCommand.protocol = {
     x: nengi.Int32,
-    y: nengi.Int32
+    y: nengi.Int32,
 }
 
 export default FireCommand

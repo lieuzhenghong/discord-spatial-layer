@@ -15,6 +15,6 @@
         "semi": ["error", "never"],
         "arrow-parens": ["error", "as-needed"],
         "max-len": ["error", { "code": 140 }],
-        "no-console": "off", // we hackathon
+        "no-console": "off" // we hackathon
     }
 }

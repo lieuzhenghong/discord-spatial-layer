@@ -1,10 +1,9 @@
-
-import GameClient from './GameClient';
+import GameClient from './GameClient'
 
 window.onload = function () {
     console.log('window loaded')
 
-    const secret = document.getElementById("secret_input").nodeValue
+    const secret = document.getElementById('secret_input').nodeValue
     const gameClient = new GameClient(secret)
     let tick = 0
     let previous = performance.now()
