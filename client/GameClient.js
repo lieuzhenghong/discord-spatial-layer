@@ -71,9 +71,10 @@ class GameClient {
             this.client.addCommand(new FireCommand(worldCoord.x, worldCoord.y))
         }
 
+        // TODO figure how to trigger msg here
+        let message = "LMAO"
         if (input.mouseDown) {
-            this.client.addCommand(new MessageCommand("lol"))
-            console.log("fff")
+            this.client.addCommand(new MessageCommand(message))
         }
 
         this.input.releaseKeys()
