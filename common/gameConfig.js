@@ -10,6 +10,7 @@ const config = {
     PLAYER_SPEED: 1200,
     PLAYER_CHAT_TIMEOUT: 5000, // 5s
 
+    WEB_SOCKET: 'ws://104.248.157.227:8079',
 
     MAP_IMAGE: REPO + 'images/bg.png',
 
