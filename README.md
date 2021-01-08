@@ -45,19 +45,19 @@ good luck getting the 1,000 people on your server to download 20GB of game.
 
 ### For Github Pages
 
-1. User types `!joinspace` into a server; our bot DMs a secret to the user
-2. User navigates to [GitHub Pages link](https://juxd.github.io/discord-spatial-layer/)
-3. User enters secret into the GitHub Pages link
-4. User has joined the spatial layer and can move around, chat and use emojis.
+1. Type `!joinspace` into a server; our bot DMs a secret to the user
+2. Navigate to [GitHub Pages link](https://juxd.github.io/discord-spatial-layer/)
+3. Enters secret into the GitHub Pages link
+4. You have now joined the spatial layer and can move around, chat and use emojis.
 
 ### For Google Chrome Extension
 
-1. User installs the Google Chrome Extension 
-2. User navigates to the Discord web client
-3. User clicks the extension; 
-4. User types `!joinspace` into the server channel; our bot DMs a secret to the user
-5. User enters secret into our front end
-6. User has joined the spatial layer and can move around, chat and use emojis.
+1. Install the Google Chrome Extension 
+2. Navigate to the Discord web client
+3. Click the extension; 
+4. Type `!joinspace` into the server channel; our bot DMs a secret to the user
+5. Enter the secret into our front end
+6. You have now joined the spatial layer and can move around, chat and use emojis.
 
 ## Technical details
 
