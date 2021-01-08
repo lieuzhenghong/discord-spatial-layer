@@ -74,19 +74,26 @@ class PlayerCharacter extends PIXI.Container {
     update(delta) {
         // this.rotation = 0
         this.moodFace && this.removeChild(this.moodFace)
-        let playerNameText;
+        // let playerNameText;
+        let sprite = new PIXI.Sprite.from('../../public/images/bg.png');
+        sprite.width = 200
+        sprite.height = 200
+        sprite.anchor.set(0.5)
+        /*
         if (this.mood == "neutral") {
-            playerNameText = new PIXI.Text(name, {
+            playerNameText = new PIXI.Text("neutral", {
                 fontFamily: 'Arial', fontSize: 15, fill: 0xffffff, align: 'center',
             })
         } else {
-            playerNameText = new PIXI.Text(name, {
+            playerNameText = new PIXI.Text("happy", {
                 fontFamily: 'Arial', fontSize: 15, fill: 0xffffff, align: 'center',
             })
         }
         this.moodFace = playerNameText
         this.moodFace.y = 25
         this.moodFace.x = -25
+        */
+        this.moodFace = sprite
         this.addChild(this.moodFace)
     }
 }
