@@ -1,6 +1,7 @@
 import * as PIXI from 'pixi.js'
 import PlayerCharacter from './PlayerCharacter'
 import BackgroundGrid from './BackgroundGrid'
+import CONFIG from '../../common/nengiConfig'
 
 class PIXIRenderer {
     constructor() {
@@ -24,11 +25,11 @@ class PIXIRenderer {
         this.camera = new PIXI.Container()
 
         this.background = new PIXI.Container()
-        const texture = PIXI.Texture.from('./images/bg.png')
+        const texture = PIXI.Texture.from(CONFIG.MAP_IMAGE)
         const tilingSprite = new PIXI.TilingSprite(
             texture,
-            8000,
-            8000,
+            CONFIG.MAP_X,
+            CONFIG.MAP_Y,
         )
         this.background.addChild(tilingSprite)
 
@@ -40,7 +41,7 @@ class PIXIRenderer {
         this.camera.addChild(this.foreground)
         this.stage.addChild(this.camera)
 
-        this.background.addChild(new BackgroundGrid())
+        // this.background.addChild(new BackgroundGrid())
 
         window.addEventListener('resize', () => {
             this.resize()
