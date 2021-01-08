@@ -1,7 +1,7 @@
 import * as PIXI from 'pixi.js'
 import PlayerCharacter from './PlayerCharacter'
 import BackgroundGrid from './BackgroundGrid'
-import CONFIG from '../../common/nengiConfig'
+import CONFIG from '../../common/gameConfig'
 
 class PIXIRenderer {
     constructor() {

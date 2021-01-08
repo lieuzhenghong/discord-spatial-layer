@@ -1,5 +1,5 @@
 import GameInstance from './GameInstance'
-import nengiConfig from '../common/nengiConfig'
+import CONFIG from '../common/gameConfig'
 
 const gameInstance = new GameInstance(/* args */)
 
@@ -10,7 +10,7 @@ const hrtimeMs = function () {
 
 let tick = 0
 let previous = hrtimeMs()
-const tickLengthMs = 1000 / nengiConfig.UPDATE_RATE
+const tickLengthMs = 1000 / CONFIG.UPDATE_RATE
 
 const loop = function () {
     const now = hrtimeMs()
@@ -37,6 +37,6 @@ loop()
 /*
 // the above loop is a much fancier version of the following:
 setInterval(() => {
-    gameInstance.update(1/nengiConfig.UPDATE_RATE, tick++, Date.now())
+    gameInstance.update(1/CONFIG.UPDATE_RATE, tick++, Date.now())
 }, tickLengthMs)
 */

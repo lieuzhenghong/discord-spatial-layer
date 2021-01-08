@@ -7,6 +7,7 @@ import DiscordMessageReceived from '../common/message/DiscordMessageReceived'
 import WeaponFired from '../common/message/WeaponFired'
 import CollisionSystem from '../common/CollisionSystem'
 import AuthDatabase from './AuthDatabase'
+import CONFIG from '../common/gameConfig'
 
 class GameInstance {
     constructor() {
@@ -29,8 +30,8 @@ class GameInstance {
             // tell the client which entity it controls (the client will use this to follow it with the camera)
             this.instance.message(new Identity(entity.nid), client)
 
-            entity.x = Math.random() * 1000
-            entity.y = Math.random() * 1000
+            entity.x = CONFIG.MAP_X / 2
+            entity.y = CONFIG.MAP_Y / 2
             // establish a relation between this entity and the client
             entity.client = client
             /* eslint-disable no-param-reassign */

@@ -1,5 +1,5 @@
 import * as PIXI from 'pixi.js'
-import CONFIG from '../../common/nengiConfig'
+import CONFIG from '../../common/gameConfig'
 
 class PlayerAvatar extends PIXI.Container {
     constructor() {

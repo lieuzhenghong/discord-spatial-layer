@@ -13,7 +13,7 @@ let container;
 
   discordElement.style.height = '60%';
   discordElement.style.float = 'top';
-  
+
   container = document.createElement("div");
   container.id = "game-container";
   container.style.height = '40%';
@@ -52,7 +52,7 @@ function handleSecretKeyFormSubmit(e) {
   container.insertAdjacentHTML('beforeend', canvas);
 
   main(secretKey);
-  
+
 }
 
 document.addEventListener('submit', function (e) {
@@ -60,7 +60,7 @@ document.addEventListener('submit', function (e) {
 
   const form = e.target;
   const formId = form.getAttribute('id');
-  
+
   if (formId === SECRET_KEY_FORM_ID) {
     handleSecretKeyFormSubmit(e);
     return;
@@ -68,3 +68,4 @@ document.addEventListener('submit', function (e) {
 
 }, false);
 
+ 
