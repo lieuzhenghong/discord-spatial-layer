@@ -101,10 +101,6 @@ class GameInstance {
                     entity.processMove(command)
                 }
 
-                if (command.protocol.name === 'MessageCommand') {
-                    entity.processChatMessage(command)
-                }
-
                 if (command.protocol.name === 'FireCommand') {
                     if (entity.fire()) {
                         this.entities.forEach(potentialVictim => {

@@ -50,6 +50,8 @@ class PlayerCharacter extends PIXI.Container {
     }
 
     showMessage(msg) {
+        this.removeChild(this.messageBubble)
+
         const messageCanvas = new PIXI.Text(msg, {
             fontFamily: 'Arial', fontSize: 15, fill: 0xffffff, align: 'center',
         })

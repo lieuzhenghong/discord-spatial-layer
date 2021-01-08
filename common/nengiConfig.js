@@ -6,7 +6,6 @@ import DiscordMessageReceived from './message/DiscordMessageReceived'
 import WeaponFired from './message/WeaponFired'
 import MoveCommand from './command/MoveCommand'
 import FireCommand from './command/FireCommand'
-import MessageCommand from './command/MessageCommand'
 
 const config = {
     UPDATE_RATE: 20,
@@ -41,7 +40,6 @@ const config = {
         commands: [
             ['MoveCommand', MoveCommand],
             ['FireCommand', FireCommand],
-            ['MessageCommand', MessageCommand],
         ],
         basics: [],
     },

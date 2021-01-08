@@ -26,16 +26,6 @@ class PlayerCharacter {
         return this.weaponSystem.fire()
     }
 
-    processChatMessage(command) {
-        this.message = command.msg
-        setTimeout(() => {
-            if (this.message === command.msg) {
-                // TODO Garbage hack lol. Probably can use a monotonically increasing ID
-                this.message = ''
-            }
-        }, CONFIG.PLAYER_CHAT_TIMEOUT)
-    }
-
     processMove(command) {
         this.rotation = command.rotation
 
