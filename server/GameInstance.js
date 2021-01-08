@@ -9,6 +9,7 @@ import CollisionSystem from '../common/CollisionSystem'
 class GameInstance {
     constructor() {
         this.entities = new Map()
+        this.discordMessages = [] // TODO should this be some sort of queue/window?
         this.collisionSystem = new CollisionSystem()
         this.instance = new nengi.Instance(nengiConfig, { port: 8079 })
         this.instance.onConnect((client, clientData, callback) => {
@@ -20,6 +21,9 @@ class GameInstance {
 
             // tell the client which entity it controls (the client will use this to follow it with the camera)
             this.instance.message(new Identity(entity.nid), client)
+            this.discordMessages.forEach(
+                discordMessage => this.instance.message(new DiscordMessageReceived(discordMessage), client),
+            )
 
             entity.x = Math.random() * 1000
             entity.y = Math.random() * 1000
