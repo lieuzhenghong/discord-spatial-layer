@@ -3,14 +3,14 @@ import nengiConfig from '../common/nengiConfig'
 import PlayerCharacter from '../common/entity/PlayerCharacter'
 import GreenCircle from '../common/entity/GreenCircle'
 import Identity from '../common/message/Identity'
-import Identity from '../common/message/DiscordMessageReceived'
+import DiscordMessageReceived from '../common/message/DiscordMessageReceived'
 import WeaponFired from '../common/message/WeaponFired'
 import CollisionSystem from '../common/CollisionSystem'
 
 class GameInstance {
     constructor() {
         this.entities = new Map()
-        this.discordMessages = [] // TODO should this be some sort of queue/window?
+        this.discordMessages = ['its the theme song'] // TODO should this be some sort of queue/window?
         this.collisionSystem = new CollisionSystem()
         this.instance = new nengi.Instance(nengiConfig, { port: 8079 })
         this.instance.onConnect((client, clientData, callback) => {

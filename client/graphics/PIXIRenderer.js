@@ -72,6 +72,8 @@ class PIXIRenderer {
         if (message.protocol.name === 'Identity') {
             this.myId = message.entityId
             console.log('identified as', this.myId)
+        } else if (message.protocol.name === 'DiscordMessageReceived') {
+            console.log('rec mesage', message)
         }
     }
 

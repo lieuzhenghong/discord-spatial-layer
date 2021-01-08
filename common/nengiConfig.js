@@ -3,6 +3,7 @@ import nengi from 'nengi'
 import PlayerCharacter from './entity/PlayerCharacter'
 import GreenCircle from './entity/GreenCircle'
 import Identity from './message/Identity'
+import DiscordMessageReceived from './message/DiscordMessageReceived'
 import WeaponFired from './message/WeaponFired'
 import MoveCommand from './command/MoveCommand'
 import FireCommand from './command/FireCommand'
@@ -28,7 +29,8 @@ const config = {
         localMessages: [],
         messages: [
             ['Identity', Identity],
-            ['WeaponFired', WeaponFired]
+            ['WeaponFired', WeaponFired],
+            ['DiscordMessageReceived', DiscordMessageReceived],
         ],
         commands: [
             ['MoveCommand', MoveCommand],
