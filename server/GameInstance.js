@@ -7,13 +7,17 @@ import DiscordMessageReceived from '../common/message/DiscordMessageReceived'
 import WeaponFired from '../common/message/WeaponFired'
 import CollisionSystem from '../common/CollisionSystem'
 
+import Discord from 'discord.js';
+
 class GameInstance {
     constructor() {
         this.entities = new Map()
         this.discordMessages = ['its the theme song'] // TODO should this be some sort of queue/window?
         this.collisionSystem = new CollisionSystem()
         this.instance = new nengi.Instance(nengiConfig, { port: 8079 })
+        this.globalChannel = this.instance.createChannel()
         this.instance.onConnect((client, clientData, callback) => {
+            this.globalChannel.subscribe(client)
             //callback({ accepted: false, text: 'Connection denied.'})
 
             // create a entity for this client
@@ -46,6 +50,7 @@ class GameInstance {
         })
 
         this.instance.onDisconnect(client => {
+            this.globalChannel.unsubscribe(client)
             this.entities.delete(client.entity.nid)
             this.instance.removeEntity(client.entity)
         })
@@ -54,7 +59,36 @@ class GameInstance {
         for (var i = 0; i < 0; i++) {
             this.spawnGreenCircle()
         }
+
+        this.registerDiscordClient()
     }
+
+
+    registerDiscordClient() {
+        const bot = new Discord.Client();
+
+        bot.once('ready', () => console.log('discord client ready!'));
+
+        const printGuildMembers = guild => {
+            guild.members.cache.each(mem => console.log(`${mem.displayName} (ID: ${mem.user.id})`));
+        }
+
+        bot.on('presenceUpdate', (_, presence) => {
+            console.log('presence update received.');
+            printGuildMembers(presence.guild)
+        });
+
+        bot.on('message', msg => console.log(`msg received: ${msg.content}`));
+
+        // DO this for each client
+        bot.on('message', msg => {
+            console.log(msg)
+            this.globalChannel.addMessage(new DiscordMessageReceived(msg.content))
+        });
+
+        bot.login(process.env.DISCORD_TOKEN);
+    }
+
 
     spawnGreenCircle() {
         const green = new GreenCircle(
