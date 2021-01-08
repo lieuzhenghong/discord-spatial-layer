@@ -2,6 +2,7 @@ import nengi from 'nengi'
 import nengiConfig from '../common/nengiConfig'
 import InputSystem from './InputSystem'
 import MoveCommand from '../common/command/MoveCommand'
+import MessageCommand from '../common/command/MessageCommand'
 import FireCommand from '../common/command/FireCommand'
 import PIXIRenderer from './graphics/PIXIRenderer'
 
@@ -44,6 +45,7 @@ class GameClient {
         })
 
         network.messages.forEach(message => {
+            this.client.addCommand(new MessageCommand(message))
             this.renderer.processMessage(message)
         })
 

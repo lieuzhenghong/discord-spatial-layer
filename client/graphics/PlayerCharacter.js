@@ -1,13 +1,8 @@
 import * as PIXI from 'pixi.js'
 
-class PlayerCharacter extends PIXI.Container {
-    constructor(entity) {
+class PlayerAvatar extends PIXI.Container {
+    constructor() {
         super()
-        this.x = entity.x
-        this.y = entity.y
-        this.isAlive = entity.isAlive
-
-        this.rotation = 0 // entity.rotation
 
         this.body = new PIXI.Graphics()
         this.body.beginFill(0xffffff)
@@ -23,19 +18,49 @@ class PlayerCharacter extends PIXI.Container {
         this.nose.lineTo(0, 25)
         this.nose.endFill()
 
+        this.angle = 270
+
         this.addChild(this.nose)
         this.addChild(this.body)
-        // this.addChild(this.hitpointBar)
+    }
+}
 
-        const name = 'weineng'
+class PlayerCharacter extends PIXI.Container {
+    constructor(entity) {
+        super()
+        this.x = entity.x
+        this.y = entity.y
+        this.isAlive = entity.isAlive
+
+        this.avatar = new PlayerAvatar()
+
+        this.addChild(this.avatar)
+
+        let name = entity.name
 
         const playerNameText = new PIXI.Text(name, {
             fontFamily: 'Arial', fontSize: 15, fill: 0xffffff, align: 'center',
         })
         this.playerNameText = playerNameText
         this.playerNameText.y = 25
-        this.playerNameText.x = -20
+        this.playerNameText.x = -25
         this.addChild(this.playerNameText)
+    }
+
+    showMessage(msg) {
+        let messageCanvas = new PIXI.Text(msg ,{fontFamily : 'Arial', fontSize: 15, fill : 0xffffff, align : 'center'});
+        this.messageBubble = messageCanvas
+        this.messageBubble.y = -30
+        this.messageBubble.x = -25
+        this.addChild(this.messageBubble)
+        setTimeout(() => {
+            this.removeChild(messageCanvas)
+            messageCanvas.destroy({
+                children: true,
+                texture: true,
+                baseTexture: true
+            })
+        }, 5000)
     }
 
     update(delta) {

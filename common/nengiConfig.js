@@ -1,12 +1,12 @@
 import nengi from 'nengi'
 
 import PlayerCharacter from './entity/PlayerCharacter'
-import GreenCircle from './entity/GreenCircle'
 import Identity from './message/Identity'
 import DiscordMessageReceived from './message/DiscordMessageReceived'
 import WeaponFired from './message/WeaponFired'
 import MoveCommand from './command/MoveCommand'
 import FireCommand from './command/FireCommand'
+import MessageCommand from './command/MessageCommand'
 
 const config = {
     UPDATE_RATE: 20,
@@ -22,8 +22,7 @@ const config = {
 
     protocols: {
         entities: [
-            ['PlayerCharacter', PlayerCharacter],
-            ['GreenCircle', GreenCircle],
+            ['PlayerCharacter', PlayerCharacter]
         ],
 
         localMessages: [],
@@ -35,6 +34,7 @@ const config = {
         commands: [
             ['MoveCommand', MoveCommand],
             ['FireCommand', FireCommand],
+            ['MessageCommand', MessageCommand]
         ],
         basics: [],
     },

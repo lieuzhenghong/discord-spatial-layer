@@ -2,7 +2,6 @@ import nengi from 'nengi'
 import Discord from 'discord.js'
 import nengiConfig from '../common/nengiConfig'
 import PlayerCharacter from '../common/entity/PlayerCharacter'
-import GreenCircle from '../common/entity/GreenCircle'
 import Identity from '../common/message/Identity'
 import DiscordMessageReceived from '../common/message/DiscordMessageReceived'
 import WeaponFired from '../common/message/WeaponFired'
@@ -12,7 +11,6 @@ import AuthDatabase from './AuthDatabase'
 class GameInstance {
     constructor() {
         this.entities = new Map()
-        this.discordMessages = ['its the theme song'] // TODO should this be some sort of queue/window?
         this.collisionSystem = new CollisionSystem()
         this.instance = new nengi.Instance(nengiConfig, { port: 8079 })
         this.globalChannel = this.instance.createChannel()
@@ -29,9 +27,6 @@ class GameInstance {
 
             // tell the client which entity it controls (the client will use this to follow it with the camera)
             this.instance.message(new Identity(entity.nid), client)
-            this.discordMessages.forEach(
-                discordMessage => this.instance.message(new DiscordMessageReceived(discordMessage), client),
-            )
 
             entity.x = Math.random() * 1000
             entity.y = Math.random() * 1000
@@ -58,10 +53,6 @@ class GameInstance {
             this.instance.removeEntity(client.entity)
         })
 
-        for (let i = 0; i < 0; i++) {
-            this.spawnGreenCircle()
-        }
-
         this.registerDiscordClient()
     }
 
@@ -84,20 +75,10 @@ class GameInstance {
         // DO this for each client
         bot.on('message', msg => {
             console.log(msg)
-            this.globalChannel.addMessage(new DiscordMessageReceived(msg.content))
+            this.globalChannel.addMessage(new DiscordMessageReceived(msg))
         })
 
         bot.login(process.env.DISCORD_TOKEN)
-    }
-
-    spawnGreenCircle() {
-        const green = new GreenCircle(
-            Math.random() * 1000,
-            Math.random() * 1000,
-        )
-        // Order is important for the next two lines
-        this.instance.addEntity(green) // assigns an `nid` to green
-        this.entities.set(green.nid, green) // uses the `nid` as a key
     }
 
     update(delta) {
@@ -117,6 +98,10 @@ class GameInstance {
                     entity.processMove(command)
                 }
 
+                if (command.protocol.name === 'MessageCommand') {
+                    entity.processChatMessage(command)
+                }
+
                 if (command.protocol.name === 'FireCommand') {
                     if (entity.fire()) {
                         this.entities.forEach(potentialVictim => {
@@ -131,18 +116,6 @@ class GameInstance {
                 }
             }
         }
-
-        this.entities.forEach(entity => {
-            if (entity instanceof GreenCircle) {
-                if (!entity.isAlive) {
-                    // Order matters for the next 2 lines
-                    this.entities.delete(entity.nid)
-                    this.instance.removeEntity(entity)
-                    // respawn after one second
-                    setTimeout(() => { this.spawnGreenCircle() }, 1000)
-                }
-            }
-        })
 
         // TODO: the rest of the game logic
         this.instance.clients.forEach(client => {
