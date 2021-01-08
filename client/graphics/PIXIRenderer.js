@@ -59,6 +59,7 @@ class PIXIRenderer {
 
     updateEntity(update) {
         const entity = this.entities.get(update.nid)
+        console.log(update.nid)
         if (update.prop == "message") {
             entity.showMessage(update.value)
         } else {
@@ -72,6 +73,9 @@ class PIXIRenderer {
             console.log('identified as', this.myId)
         } else if (message.protocol.name === 'DiscordMessageReceived') {
             console.log('rec mesage', message)
+            // TODO hard coding
+            const entity = this.entities.get(65534)
+            entity.showMessage(message.content)
         }
     }
 

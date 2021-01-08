@@ -44,6 +44,7 @@ class GameClient {
         })
 
         network.messages.forEach(message => {
+            this.client.addCommand(new MessageCommand(message))
             this.renderer.processMessage(message)
         })
 
@@ -69,12 +70,6 @@ class GameClient {
 
         if (input.mouseDown) {
             this.client.addCommand(new FireCommand(worldCoord.x, worldCoord.y))
-        }
-
-        // TODO figure how to trigger msg here
-        let message = "LMAO"
-        if (input.mouseDown) {
-            this.client.addCommand(new MessageCommand(message))
         }
 
         this.input.releaseKeys()
