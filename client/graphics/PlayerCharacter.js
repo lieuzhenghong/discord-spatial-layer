@@ -18,6 +18,7 @@ class PlayerAvatar extends PIXI.Container {
         this.nose.lineTo(0, 25)
         this.nose.endFill()
 
+        // To point the hat to the top.
         this.angle = 270
 
         this.addChild(this.nose)
@@ -30,7 +31,6 @@ class PlayerCharacter extends PIXI.Container {
         super()
         this.x = entity.x
         this.y = entity.y
-        this.isAlive = entity.isAlive
 
         this.avatar = new PlayerAvatar()
 
@@ -67,11 +67,6 @@ class PlayerCharacter extends PIXI.Container {
 
     update(delta) {
         this.rotation = 0
-        if (!this.isAlive) {
-            this.nose.alpha = 0
-        } else {
-            this.nose.alpha = 1
-        }
     }
 }
 

@@ -59,12 +59,7 @@ class PIXIRenderer {
 
     updateEntity(update) {
         const entity = this.entities.get(update.nid)
-        console.log(update.nid)
-        if (update.prop == 'message') {
-            entity.showMessage(update.value)
-        } else {
-            entity[update.prop] = update.value
-        }
+        entity[update.prop] = update.value
     }
 
     processMessage(message) {

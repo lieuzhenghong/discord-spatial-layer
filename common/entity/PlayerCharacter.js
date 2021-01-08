@@ -6,44 +6,36 @@ class PlayerCharacter {
     constructor({ name }) {
         this.x = 0
         this.y = 0
-        this.isAlive = true
 
         this.moveDirection = {
             x: 0,
             y: 0,
         }
 
-        this.speed = 400
-
         this.name = name
 
         this.rotation = 0
+        this.speed = 400
 
         this.weaponSystem = new WeaponSystem()
-
         this.collider = new SAT.Circle(new SAT.Vector(this.x, this.y), 25)
     }
 
     fire() {
-        if (!this.isAlive) {
-            return false
-        }
-
         return this.weaponSystem.fire()
     }
 
     processChatMessage(command) {
         this.message = command.msg
         setTimeout(() => {
-            this.message = ''
+            if (this.message === command.msg) {
+                // TODO Garbage hack lol. Probably can use a monotonically increasing ID
+                this.message = ''
+            }
         }, 5000)
     }
 
     processMove(command) {
-        if (!this.isAlive) {
-            return
-        }
-
         this.rotation = command.rotation
 
         let unitX = 0
@@ -88,7 +80,6 @@ class PlayerCharacter {
 PlayerCharacter.protocol = {
     x: { type: nengi.Float32, interp: true },
     y: { type: nengi.Float32, interp: true },
-    isAlive: nengi.Boolean,
     hitpoints: nengi.UInt8,
     name: nengi.String,
     message: nengi.String,

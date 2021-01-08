@@ -22,8 +22,3 @@ The controls are
 
 Players and green circles have 100 hp, and shots do 25 damage. After reaching 0 hp players and green circles will respawn 1 second later.
 
-## Bots
-There are bots programmed to run around randomly in the game. To connect the bots keep the game running as done with `npm start` and then open an additional command prompt.
-```sh
-> node bot/index.js
-```
