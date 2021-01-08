@@ -1,8 +1,10 @@
 import nengiConfig from '../../../common/nengiConfig';
-import main from '../../../client/clientMain';
+import main from '../../../client/runClient';
 
 console.log(nengiConfig);
 const SECRET_KEY_FORM_ID = 'secret-key-form';
+
+let container;
 
 (function() {
   const discordElement = document.getElementById("app-mount");
@@ -12,7 +14,7 @@ const SECRET_KEY_FORM_ID = 'secret-key-form';
   discordElement.style.height = '60%';
   discordElement.style.float = 'top';
   
-  const container = document.createElement("div");
+  container = document.createElement("div");
   container.id = "game-container";
   container.style.height = '40%';
   container.style.width = '100%';
@@ -44,8 +46,13 @@ function renderSecretKeyForm() {
 
 function handleSecretKeyFormSubmit(e) {
   const secretKey = document.getElementById('secret-key').value
+
+  const canvas = `<canvas id='main-canvas' style="height: 100%; width: 100%"></canvas>`;
+  container.innerText = "";
+  container.insertAdjacentHTML('beforeend', canvas);
+
   main(secretKey);
-  alert(secretKey);
+  
 }
 
 document.addEventListener('submit', function (e) {
