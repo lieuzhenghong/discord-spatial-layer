@@ -29,9 +29,9 @@ jobs:
     - run: npm run build --if-present
     - name: deploy
       uses: peaceiris/actions-gh-pages@v3
-      env:
-        ACTIONS_DEPLOY_KEY: ${{ secrets.GITHUB_TOKEN }}
-        PUBLISH_BRANCH: build
-        PUBLISH_DIR: ./public
+      with:
+        personal_token: ${{ secrets.PERSONAL_TOKEN }}
+        publish_branch: build
+        publish_dir: ./public
       
         
