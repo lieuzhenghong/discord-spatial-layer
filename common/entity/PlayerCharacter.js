@@ -15,7 +15,7 @@ class PlayerCharacter {
 
         this.speed = 400
 
-        this.name = "weineng"
+        this.name = 'weineng'
 
         this.rotation = 0
 
@@ -35,7 +35,7 @@ class PlayerCharacter {
     processChatMessage(command) {
         this.message = command.msg
         setTimeout(() => {
-            this.message = ""
+            this.message = ''
         }, 5000)
     }
 
@@ -91,7 +91,7 @@ PlayerCharacter.protocol = {
     isAlive: nengi.Boolean,
     hitpoints: nengi.UInt8,
     name: nengi.String,
-    message: nengi.String
+    message: nengi.String,
 }
 
 export default PlayerCharacter

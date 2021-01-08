@@ -22,7 +22,7 @@ const config = {
 
     protocols: {
         entities: [
-            ['PlayerCharacter', PlayerCharacter]
+            ['PlayerCharacter', PlayerCharacter],
         ],
 
         localMessages: [],
@@ -34,7 +34,7 @@ const config = {
         commands: [
             ['MoveCommand', MoveCommand],
             ['FireCommand', FireCommand],
-            ['MessageCommand', MessageCommand]
+            ['MessageCommand', MessageCommand],
         ],
         basics: [],
     },

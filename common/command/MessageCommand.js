@@ -7,7 +7,7 @@ class MessageCommand {
 }
 
 MessageCommand.protocol = {
-    msg: nengi.String
+    msg: nengi.String,
 }
 
-export default MessageCommand;
+export default MessageCommand
