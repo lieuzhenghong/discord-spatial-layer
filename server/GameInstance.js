@@ -3,6 +3,7 @@ import nengiConfig from '../common/nengiConfig'
 import PlayerCharacter from '../common/entity/PlayerCharacter'
 import GreenCircle from '../common/entity/GreenCircle'
 import Identity from '../common/message/Identity'
+import Identity from '../common/message/DiscordMessageReceived'
 import WeaponFired from '../common/message/WeaponFired'
 import CollisionSystem from '../common/CollisionSystem'
 
