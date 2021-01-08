@@ -1,6 +1,7 @@
 import nengi from 'nengi'
 import SAT from 'sat'
 import WeaponSystem from '../WeaponSystem'
+import CONFIG from '../nengiConfig'
 
 class PlayerCharacter {
     constructor({ name }) {
@@ -15,7 +16,7 @@ class PlayerCharacter {
         this.name = name
 
         this.rotation = 0
-        this.speed = 400
+        this.speed = CONFIG.PLAYER_SPEED
 
         this.weaponSystem = new WeaponSystem()
         this.collider = new SAT.Circle(new SAT.Vector(this.x, this.y), 25)
@@ -32,7 +33,7 @@ class PlayerCharacter {
                 // TODO Garbage hack lol. Probably can use a monotonically increasing ID
                 this.message = ''
             }
-        }, 5000)
+        }, CONFIG.PLAYER_CHAT_TIMEOUT)
     }
 
     processMove(command) {
@@ -43,18 +44,18 @@ class PlayerCharacter {
 
         // create forces from input
         if (command.forward) {
-            unitY -= 1
+            unitY--
         }
         if (command.backward) {
-            unitY += 1
+            unitY++
         }
 
         if (command.left) {
-            unitX -= 1
+            unitX--
         }
 
         if (command.right) {
-            unitX += 1
+            unitX++
         }
 
         // normalize

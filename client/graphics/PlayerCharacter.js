@@ -1,4 +1,5 @@
 import * as PIXI from 'pixi.js'
+import CONFIG from '../../common/nengiConfig'
 
 class PlayerAvatar extends PIXI.Container {
     constructor() {
@@ -19,6 +20,7 @@ class PlayerAvatar extends PIXI.Container {
         this.nose.endFill()
 
         // To point the hat to the top.
+        // TODO REMOVE THIS IN THE FUTURE
         this.angle = 270
 
         this.addChild(this.nose)
@@ -62,7 +64,7 @@ class PlayerCharacter extends PIXI.Container {
                 texture: true,
                 baseTexture: true,
             })
-        }, 5000)
+        }, CONFIG.PLAYER_CHAT_TIMEOUT)
     }
 
     update(delta) {
