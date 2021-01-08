@@ -2,28 +2,25 @@ import * as PIXI from 'pixi.js'
 import CONFIG from '../../common/gameConfig'
 
 class PlayerAvatar extends PIXI.Container {
-    constructor() {
+    constructor(skin_rgb) {
         super()
 
         this.body = new PIXI.Graphics()
         this.body.beginFill(0xffffff)
         this.body.drawCircle(0, 0, 25)
         this.body.endFill()
+        this.body.tint = skin_rgb
 
-        this.body.tint = 0xff0000
-
-        this.nose = new PIXI.Graphics()
-        this.nose.beginFill(0xff99999)
-        this.nose.moveTo(0, -25)
-        this.nose.lineTo(40, 0)
-        this.nose.lineTo(0, 25)
-        this.nose.endFill()
+        this.hat = new PIXI.Graphics()
+        // this.hat.beginFill('0x'+Math.random().toString(16).substr(2,6))
+        this.hat.moveTo(0, -25)
+        this.hat.lineTo(70, 0)
+        this.hat.lineTo(0, 25)
+        this.hat.endFill()
 
         // To point the hat to the top.
-        // TODO REMOVE THIS IN THE FUTURE
-        this.angle = 270
 
-        this.addChild(this.nose)
+        this.addChild(this.hat)
         this.addChild(this.body)
     }
 }
@@ -33,8 +30,10 @@ class PlayerCharacter extends PIXI.Container {
         super()
         this.x = entity.x
         this.y = entity.y
+        this.mood = entity.mood
+        console.log("mood:", this.mood)
 
-        this.avatar = new PlayerAvatar()
+        this.avatar = new PlayerAvatar(0xff0000)
 
         this.addChild(this.avatar)
 
@@ -49,8 +48,8 @@ class PlayerCharacter extends PIXI.Container {
             wordWrap: true,
         })
         this.playerNameText = playerNameText
-        this.playerNameText.y = 25 + playerNameText.height / 2
-        this.playerNameText.x = -playerNameText.width / 2
+        this.playerNameText.y = 25
+        this.playerNameText.x = -25
         this.addChild(this.playerNameText)
     }
 
