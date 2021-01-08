@@ -51,7 +51,7 @@ class PlayerCharacter extends PIXI.Container {
     }
 
     showMessage(msg) {
-        this.removeChild(this.messageBubble)
+        this.messageBubble && this.removeChild(this.messageBubble)
 
         const messageCanvas = new PIXI.Text(msg, {
             fontFamily: 'Arial',
@@ -81,9 +81,7 @@ class PlayerCharacter extends PIXI.Container {
     }
 
     update(delta) {
-        // this.rotation = 0
         this.moodFace && this.removeChild(this.moodFace)
-        // let playerNameText;
         let sprite;
 
         if (this.mood === "neutral") {

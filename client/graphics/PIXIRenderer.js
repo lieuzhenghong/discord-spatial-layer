@@ -68,7 +68,9 @@ class PIXIRenderer {
 
     updateEntity(update) {
         const entity = this.entities.get(update.nid)
-        entity[update.prop] = update.value
+        if (entity) {
+            entity[update.prop] = update.value
+        }
     }
 
     processMessage(message) {
@@ -103,7 +105,7 @@ class PIXIRenderer {
     drawHitscan(x, y, targetX, targetY, color) {
         // draws a debug line showing a shot
         const graphics = new PIXI.Graphics()
-        graphics.lineStyle(10, color)
+        graphics.lineStyle(2, color)
         graphics.moveTo(x, y)
         graphics.lineTo(targetX, targetY)
         this.foreground.addChild(graphics)
