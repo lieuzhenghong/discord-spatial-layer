@@ -14,15 +14,16 @@ class GameInstance {
         this.collisionSystem = new CollisionSystem()
         this.instance = new nengi.Instance(nengiConfig, { port: 8079 })
         this.authDatabase = new AuthDatabase()
-        if (process.env.NODE_ENV === 'development') this.authDatabase.addUserWithSecret('joe', 'MAGIC_VALUE')
+        // if (process.env.NODE_ENV === 'development') this.authDatabase.addUserWithSecret({ displayName: 'joe' }, 'MAGIC_VALUE')
         this.instance.onConnect((client, clientData, callback) => {
-            const { secret } = clientData.fromClient
-            if (!this.authDatabase.getUser(secret)) {
+            const { user } = this.authDatabase.getUser(clientData.fromClient.secret) || { user: undefined }
+            if (!user) {
                 callback({ accepted: false, text: 'Secret not correct!' })
+                return
             }
 
             // create a entity for this client
-            const entity = new PlayerCharacter({ name: this.authDatabase.getUser(secret).user })
+            const entity = new PlayerCharacter({ name: user.displayName })
             this.instance.addEntity(entity) // adding an entity to a nengi instance assigns it an id
 
             // tell the client which entity it controls (the client will use this to follow it with the camera)
@@ -32,6 +33,7 @@ class GameInstance {
             entity.y = Math.random() * 1000
             // establish a relation between this entity and the client
             entity.client = client
+            /* eslint-disable no-param-reassign */
             client.entity = entity
 
             // define the view (the area of the game visible to this client, all else is culled)
@@ -41,6 +43,7 @@ class GameInstance {
                 halfWidth: 1000,
                 halfHeight: 1000,
             }
+            /* eslint-enable no-param-reassign */
 
             this.entities.set(entity.nid, entity)
 
@@ -55,26 +58,28 @@ class GameInstance {
         this.registerDiscordClient()
     }
 
+    handleMessage(msg) {
+        const prefix = '!'
+        if (msg.author.bot) return
+        if (msg.content.startsWith(prefix)) {
+            const cmd = msg.content.slice(prefix.length)
+            if (cmd === 'joinspace') {
+                msg.author.send(`Your entrance code is: ${this.authDatabase.addUser(msg.member)}`)
+            }
+            return
+        }
+        this.instance.messageAll(new DiscordMessageReceived(msg))
+    }
+
     registerDiscordClient() {
         const bot = new Discord.Client()
 
         bot.once('ready', () => console.log('discord client ready!'))
 
-        const printGuildMembers = guild => {
-            guild.members.cache.each(mem => console.log(`${mem.displayName} (ID: ${mem.user.id})`))
-        }
-
-        bot.on('presenceUpdate', (_, presence) => {
-            console.log('presence update received.')
-            printGuildMembers(presence.guild)
-        })
-
         bot.on('message', msg => console.log(`msg received: ${msg.content}`))
 
         // DO this for each client
-        bot.on('message', msg => {
-            this.instance.messageAll(new DiscordMessageReceived(msg))
-        })
+        bot.on('message', msg => this.handleMessage(msg))
 
         bot.login(process.env.DISCORD_TOKEN)
     }
