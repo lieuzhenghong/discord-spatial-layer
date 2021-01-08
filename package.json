@@ -11,6 +11,8 @@
   "author": "timetocode // Alex",
   "license": "Apache 2.0",
   "dependencies": {
+    "discord.js": "^12.5.1",
+    "dotenv": "^8.2.0",
     "esm": "3.2.25",
     "nengi": "1.13.1",
     "pixi.js": "5.1.5",

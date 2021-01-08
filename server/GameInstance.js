@@ -80,7 +80,7 @@ class GameInstance {
                 const entity = client.entity
                 //console.log('command', command)
                 if (command.protocol.name === 'MoveCommand') {
-                    entity.processMove(command)                    
+                    entity.processMove(command)
                 }
 
                 if (command.protocol.name === 'FireCommand') {
@@ -90,7 +90,6 @@ class GameInstance {
                             const hit = this.collisionSystem.checkLineCircle(entity.x, entity.y, command.x, command.y, potentialVictim.collider)
                             // if the line intersects a player other than the shooter
                             if (hit && potentialVictim.nid !== entity.nid) {
-                                potentialVictim.takeDamage(25)
                             }
                         })
 

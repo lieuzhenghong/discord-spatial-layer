@@ -14,6 +14,7 @@
         "indent": ["error", 4],
         "semi": ["error", "never"],
         "arrow-parens": ["error", "as-needed"],
-        "max-len": ["error", { "code": 140 }]
+        "max-len": ["error", { "code": 140 }],
+        "no-console": "off", // we hackathon
     }
 }
