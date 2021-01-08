@@ -1,7 +1,7 @@
 import nengi from 'nengi'
 import SAT from 'sat'
 import WeaponSystem from '../WeaponSystem'
-import CONFIG from '../nengiConfig'
+import CONFIG from '../gameConfig'
 
 class PlayerCharacter {
     constructor({ name }) {
@@ -22,6 +22,7 @@ class PlayerCharacter {
         this.collider = new SAT.Circle(new SAT.Vector(this.x, this.y), 25)
     }
 
+    // TODO DISABLE IN THE FUTURE?
     fire() {
         return this.weaponSystem.fire()
     }
@@ -34,18 +35,18 @@ class PlayerCharacter {
 
         // create forces from input
         if (command.forward) {
-            unitY--
+            unitY -= 1
         }
         if (command.backward) {
-            unitY++
+            unitY += 1
         }
 
         if (command.left) {
-            unitX--
+            unitX -= 1
         }
 
         if (command.right) {
-            unitX++
+            unitX += 1
         }
 
         // normalize
@@ -67,7 +68,12 @@ class PlayerCharacter {
 
     move(delta) {
         this.x += this.moveDirection.x * this.speed * delta
+        this.x = Math.max(0, this.x)
+        this.x = Math.min(CONFIG.MAP_X, this.x)
+
         this.y += this.moveDirection.y * this.speed * delta
+        this.y = Math.max(0, this.y)
+        this.y = Math.min(CONFIG.MAP_Y, this.y)
 
         this.collider.pos.x = this.x
         this.collider.pos.y = this.y
