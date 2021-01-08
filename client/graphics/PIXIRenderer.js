@@ -22,7 +22,16 @@ class PIXIRenderer {
 
         this.stage = new PIXI.Container()
         this.camera = new PIXI.Container()
+
         this.background = new PIXI.Container()
+        const texture = PIXI.Texture.from('./images/bg.png')
+        const tilingSprite = new PIXI.TilingSprite(
+            texture,
+            8000,
+            8000,
+        )
+        this.background.addChild(tilingSprite)
+
         this.middleground = new PIXI.Container()
         this.foreground = new PIXI.Container()
 
@@ -30,14 +39,6 @@ class PIXIRenderer {
         this.camera.addChild(this.middleground)
         this.camera.addChild(this.foreground)
         this.stage.addChild(this.camera)
-
-        const texture = PIXI.Texture.from('./images/bg.png')
-        const tilingSprite = new PIXI.TilingSprite(
-            texture,
-            this.renderer.width,
-            this.renderer.height,
-        )
-        this.stage.addChild(tilingSprite)
 
         this.background.addChild(new BackgroundGrid())
 
