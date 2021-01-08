@@ -13,7 +13,6 @@ class GameClient {
         this.client = new nengi.Client(nengiConfig)
         this.renderer = new PIXIRenderer()
         this.input = new InputSystem()
-        this.secret = { fromClient: { secret } }
 
         this.client.onConnect(res => {
             console.log('onConnect response:', res)
@@ -23,7 +22,7 @@ class GameClient {
             console.log('connection closed')
         })
 
-        this.client.connect('ws://localhost:8079', this.secret)
+        this.client.connect('ws://localhost:8079', { secret })
     }
 
     update(delta, tick, now) {

@@ -149,6 +149,11 @@ class AuthDatabase {
     getUser(code) {
         return this.registered.get(code)
     }
+
+    addUserWithSecret(user, secret) {
+        this.registered.set(secret, { user, game_status: null })
+        return secret
+    }
 }
 
 runTests({

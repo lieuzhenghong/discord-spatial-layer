@@ -3,7 +3,7 @@ import SAT from 'sat'
 import WeaponSystem from '../WeaponSystem'
 
 class PlayerCharacter {
-    constructor() {
+    constructor({ name }) {
         this.x = 0
         this.y = 0
         this.isAlive = true
@@ -15,7 +15,7 @@ class PlayerCharacter {
 
         this.speed = 400
 
-        this.name = 'weineng'
+        this.name = name
 
         this.rotation = 0
 

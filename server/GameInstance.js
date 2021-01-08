@@ -15,14 +15,16 @@ class GameInstance {
         this.instance = new nengi.Instance(nengiConfig, { port: 8079 })
         this.globalChannel = this.instance.createChannel()
         this.authDatabase = new AuthDatabase()
+        if (process.env.NODE_ENV === 'development') this.authDatabase.addUserWithSecret('joe', 'MAGIC_VALUE')
         this.instance.onConnect((client, clientData, callback) => {
-            if (!this.authDatabase.getUser(clientData.fromClient.secret)) {
+            const { secret } = clientData.fromClient
+            if (!this.authDatabase.getUser(secret)) {
                 callback({ accepted: false, text: 'Secret not correct!' })
             }
             this.globalChannel.subscribe(client)
 
             // create a entity for this client
-            const entity = new PlayerCharacter()
+            const entity = new PlayerCharacter({ name: this.authDatabase.getUser(secret).user })
             this.instance.addEntity(entity) // adding an entity to a nengi instance assigns it an id
 
             // tell the client which entity it controls (the client will use this to follow it with the camera)
