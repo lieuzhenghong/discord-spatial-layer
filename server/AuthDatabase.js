@@ -139,6 +139,8 @@ class AuthDatabase {
 
     // Returns the code which the user is added to AuthDatabase with
     addUser(user) {
+        console.log('auth');
+        console.log(user);
         let code = randCode()
         while (this.registered.has(code)) code = randCode()
         this.registered.set(code, { user, game_status: null })
