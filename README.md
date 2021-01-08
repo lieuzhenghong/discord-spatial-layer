@@ -1,5 +1,4 @@
-# nengi-2d-basic
-This is a game template demonstrating the networking of a 2D shooter with out any client-side prediction or lag compensation. Culling is enabled, and you can modify the client view size on the server to make the effects of culling more obvious.
+# Discord game
 
 To run the game:
 ```sh
@@ -18,7 +17,3 @@ The controls are
 - s - down
 - d - right
 - mousemove - look around
-- mouseclick - shoot
-
-Players and green circles have 100 hp, and shots do 25 damage. After reaching 0 hp players and green circles will respawn 1 second later.
-
