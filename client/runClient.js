@@ -39,9 +39,10 @@ class UI {
         instantiateClient(secretKey)
             .then(client => {
                 console.log("success");
-                const canvas = '<canvas id=\'main-canvas\' style="height: 100%; width: 100%"></canvas>'
+                const canvas = '<canvas id=\'main-canvas\' style="height: 100%; width: 100%" tabindex="1"></canvas>'
                 this.container.innerText = ''
                 this.container.insertAdjacentHTML('beforeend', canvas)
+                document.getElementById('main-canvas').focus();
                 const gameClient = new GameClient(client)
                 let tick = 0
                 let previous = performance.now()
