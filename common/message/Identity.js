@@ -7,7 +7,7 @@ class Identity {
 }
 
 Identity.protocol = {
-    entityId: nengi.UInt16
+    entityId: nengi.UInt16,
 }
 
 export default Identity

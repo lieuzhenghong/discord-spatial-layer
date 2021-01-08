@@ -6,10 +6,10 @@ import MessageCommand from '../common/command/MessageCommand'
 import FireCommand from '../common/command/FireCommand'
 import PIXIRenderer from './graphics/PIXIRenderer'
 
-let ALLOW_ROTATION = true
+const ALLOW_ROTATION = false
 
 class GameClient {
-    constructor() {
+    constructor(secret) {
         this.client = new nengi.Client(nengiConfig)
         this.renderer = new PIXIRenderer()
         this.input = new InputSystem()
@@ -22,7 +22,7 @@ class GameClient {
             console.log('connection closed')
         })
 
-        this.client.connect('ws://localhost:8079')
+        this.client.connect('ws://localhost:8079', { secret })
     }
 
     update(delta, tick, now) {

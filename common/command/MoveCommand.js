@@ -17,7 +17,7 @@ MoveCommand.protocol = {
     backward: nengi.Boolean,
     right: nengi.Boolean,
     rotation: nengi.Float32,
-    delta: nengi.Float32
+    delta: nengi.Float32,
 }
 
-export default MoveCommand;
+export default MoveCommand

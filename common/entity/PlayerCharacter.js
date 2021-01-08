@@ -1,22 +1,21 @@
 import nengi from 'nengi'
-import WeaponSystem from '../WeaponSystem'
 import SAT from 'sat'
+import WeaponSystem from '../WeaponSystem'
 
 class PlayerCharacter {
-    constructor() {
+    constructor({ name }) {
         this.x = 0
         this.y = 0
         this.isAlive = true
 
-
         this.moveDirection = {
             x: 0,
-            y: 0
+            y: 0,
         }
 
         this.speed = 400
 
-        this.name = "weineng"
+        this.name = name
 
         this.rotation = 0
 
@@ -36,7 +35,7 @@ class PlayerCharacter {
     processChatMessage(command) {
         this.message = command.msg
         setTimeout(() => {
-            this.message = ""
+            this.message = ''
         }, 5000)
     }
 
@@ -69,8 +68,8 @@ class PlayerCharacter {
         // normalize
         const len = Math.sqrt(unitX * unitX + unitY * unitY)
         if (len > 0) {
-            unitX = unitX / len
-            unitY = unitY / len
+            unitX /= len
+            unitY /= len
         }
 
         this.moveDirection.x = unitX
@@ -92,7 +91,7 @@ PlayerCharacter.protocol = {
     isAlive: nengi.Boolean,
     hitpoints: nengi.UInt8,
     name: nengi.String,
-    message: nengi.String
+    message: nengi.String,
 }
 
 export default PlayerCharacter

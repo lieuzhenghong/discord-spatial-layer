@@ -36,9 +36,11 @@ class PlayerCharacter extends PIXI.Container {
 
         this.addChild(this.avatar)
 
-        let name = entity.name
+        const { name } = entity
 
-        let playerNameText = new PIXI.Text(name,{fontFamily : 'Arial', fontSize: 15, fill : 0xffffff, align : 'center'});
+        const playerNameText = new PIXI.Text(name, {
+            fontFamily: 'Arial', fontSize: 15, fill: 0xffffff, align: 'center',
+        })
         this.playerNameText = playerNameText
         this.playerNameText.y = 25
         this.playerNameText.x = -25
@@ -46,7 +48,9 @@ class PlayerCharacter extends PIXI.Container {
     }
 
     showMessage(msg) {
-        let messageCanvas = new PIXI.Text(msg ,{fontFamily : 'Arial', fontSize: 15, fill : 0xffffff, align : 'center'});
+        const messageCanvas = new PIXI.Text(msg, {
+            fontFamily: 'Arial', fontSize: 15, fill: 0xffffff, align: 'center',
+        })
         this.messageBubble = messageCanvas
         this.messageBubble.y = -30
         this.messageBubble.x = -25
@@ -56,7 +60,7 @@ class PlayerCharacter extends PIXI.Container {
             messageCanvas.destroy({
                 children: true,
                 texture: true,
-                baseTexture: true
+                baseTexture: true,
             })
         }, 5000)
     }

@@ -1,4 +1,4 @@
-import nengi from 'nengi';
+import nengi from 'nengi'
 
 class WeaponFired {
     constructor(sourceId, x, y, tx, ty) {
@@ -15,7 +15,7 @@ WeaponFired.protocol = {
     x: nengi.Float32,
     y: nengi.Float32,
     tx: nengi.Float32,
-    ty: nengi.Float32
+    ty: nengi.Float32,
 }
 
-export default WeaponFired;
+export default WeaponFired

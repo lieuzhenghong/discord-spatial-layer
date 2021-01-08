@@ -1,12 +1,12 @@
 import nengi from 'nengi'
+import Discord from 'discord.js'
 import nengiConfig from '../common/nengiConfig'
 import PlayerCharacter from '../common/entity/PlayerCharacter'
 import Identity from '../common/message/Identity'
 import DiscordMessageReceived from '../common/message/DiscordMessageReceived'
 import WeaponFired from '../common/message/WeaponFired'
 import CollisionSystem from '../common/CollisionSystem'
-
-import Discord from 'discord.js';
+import AuthDatabase from './AuthDatabase'
 
 class GameInstance {
     constructor() {
@@ -14,12 +14,17 @@ class GameInstance {
         this.collisionSystem = new CollisionSystem()
         this.instance = new nengi.Instance(nengiConfig, { port: 8079 })
         this.globalChannel = this.instance.createChannel()
+        this.authDatabase = new AuthDatabase()
+        if (process.env.NODE_ENV === 'development') this.authDatabase.addUserWithSecret('joe', 'MAGIC_VALUE')
         this.instance.onConnect((client, clientData, callback) => {
+            const { secret } = clientData.fromClient
+            if (!this.authDatabase.getUser(secret)) {
+                callback({ accepted: false, text: 'Secret not correct!' })
+            }
             this.globalChannel.subscribe(client)
-            //callback({ accepted: false, text: 'Connection denied.'})
 
             // create a entity for this client
-            const entity = new PlayerCharacter()
+            const entity = new PlayerCharacter({ name: this.authDatabase.getUser(secret).user })
             this.instance.addEntity(entity) // adding an entity to a nengi instance assigns it an id
 
             // tell the client which entity it controls (the client will use this to follow it with the camera)
@@ -36,7 +41,7 @@ class GameInstance {
                 x: entity.x,
                 y: entity.y,
                 halfWidth: 1000,
-                halfHeight: 1000
+                halfHeight: 1000,
             }
 
             this.entities.set(entity.nid, entity)
@@ -53,45 +58,44 @@ class GameInstance {
         this.registerDiscordClient()
     }
 
-
     registerDiscordClient() {
-        const bot = new Discord.Client();
+        const bot = new Discord.Client()
 
-        bot.once('ready', () => console.log('discord client ready!'));
+        bot.once('ready', () => console.log('discord client ready!'))
 
         const printGuildMembers = guild => {
-            guild.members.cache.each(mem => console.log(`${mem.displayName} (ID: ${mem.user.id})`));
+            guild.members.cache.each(mem => console.log(`${mem.displayName} (ID: ${mem.user.id})`))
         }
 
         bot.on('presenceUpdate', (_, presence) => {
-            console.log('presence update received.');
+            console.log('presence update received.')
             printGuildMembers(presence.guild)
-        });
+        })
 
-        bot.on('message', msg => console.log(`msg received: ${msg.content}`));
+        bot.on('message', msg => console.log(`msg received: ${msg.content}`))
 
         // DO this for each client
         bot.on('message', msg => {
             console.log(msg)
             this.globalChannel.addMessage(new DiscordMessageReceived(msg))
-        });
+        })
 
-        bot.login(process.env.DISCORD_TOKEN);
+        bot.login(process.env.DISCORD_TOKEN)
     }
 
     update(delta) {
-        //console.log('stats', this.entities.size, this.instance.clients.toArray().length, this.instance.entities.toArray().length)
+        // console.log('stats', this.entities.size, this.instance.clients.toArray().length, this.instance.entities.toArray().length)
         this.acc += delta
 
         let cmd = null
         while (cmd = this.instance.getNextCommand()) {
-            const tick = cmd.tick
-            const client = cmd.client
+            const { tick } = cmd
+            const { client } = cmd
 
             for (let i = 0; i < cmd.commands.length; i++) {
                 const command = cmd.commands[i]
-                const entity = client.entity
-                //console.log('command', command)
+                const { entity } = client
+                // console.log('command', command)
                 if (command.protocol.name === 'MoveCommand') {
                     entity.processMove(command)
                 }
@@ -102,7 +106,6 @@ class GameInstance {
 
                 if (command.protocol.name === 'FireCommand') {
                     if (entity.fire()) {
-
                         this.entities.forEach(potentialVictim => {
                             const hit = this.collisionSystem.checkLineCircle(entity.x, entity.y, command.x, command.y, potentialVictim.collider)
                             // if the line intersects a player other than the shooter

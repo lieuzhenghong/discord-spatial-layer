@@ -12,12 +12,12 @@ class PIXIRenderer {
         this.entities = new Map()
 
         this.renderer = PIXI.autoDetectRenderer({
-            width :window.innerWidth,
+            width: window.innerWidth,
             height: window.innerHeight,
             view: this.canvas,
             antialiasing: false,
             transparent: false,
-            resolution: 1
+            resolution: 1,
         })
 
         this.stage = new PIXI.Container()
@@ -60,7 +60,7 @@ class PIXIRenderer {
     updateEntity(update) {
         const entity = this.entities.get(update.nid)
         console.log(update.nid)
-        if (update.prop == "message") {
+        if (update.prop == 'message') {
             entity.showMessage(update.value)
         } else {
             entity[update.prop] = update.value
@@ -106,7 +106,7 @@ class PIXIRenderer {
             graphics.destroy({
                 children: true,
                 texture: true,
-                baseTexture: true
+                baseTexture: true,
             })
         }, 64)
     }
@@ -130,7 +130,7 @@ class PIXIRenderer {
     toWorldCoordinates(mouseX, mouseY) {
         return {
             x: -this.camera.x + mouseX,
-            y: -this.camera.y + mouseY
+            y: -this.camera.y + mouseY,
         }
     }
 
@@ -143,7 +143,7 @@ class PIXIRenderer {
         */
 
         if (this.myEntity) {
-            //this.centerCamera(this.myEntity)
+            // this.centerCamera(this.myEntity)
             this.followSmoothlyWithCamera(this.myEntity, delta)
         }
 

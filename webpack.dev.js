@@ -8,6 +8,6 @@ module.exports = merge(common, {
         contentBase: path.join(__dirname, './public'),
         publicPath: 'http://localhost:8080/js/',
         compress: true,
-        port: 8080
-    }
+        port: 8080,
+    },
 })

@@ -11,7 +11,7 @@ class InputSystem {
             r: false,
             mx: 0,
             my: 0,
-            mouseDown: false
+            mouseDown: false,
         }
 
         this.frameState = {
@@ -20,16 +20,14 @@ class InputSystem {
             a: false,
             d: false,
             r: false,
-            mouseDown: false
+            mouseDown: false,
         }
 
         // disable right click
-        document.addEventListener('contextmenu', event =>
-            event.preventDefault()
-        )
+        document.addEventListener('contextmenu', event => event.preventDefault())
 
         document.addEventListener('keydown', event => {
-            //console.log('keydown', event)
+            // console.log('keydown', event)
             // w or up arrow
             if (event.keyCode === 87 || event.keyCode === 38) {
                 this.currentState.w = true
@@ -53,7 +51,7 @@ class InputSystem {
         })
 
         document.addEventListener('keyup', event => {
-            //console.log('keyup', event)
+            // console.log('keyup', event)
             if (event.keyCode === 87 || event.keyCode === 38) {
                 this.currentState.w = false
             }
@@ -80,7 +78,6 @@ class InputSystem {
             this.currentState.mouseDown = true
             this.frameState.mouseDown = true
         })
-
 
         document.addEventListener('mouseup', event => {
             this.currentState.mouseDown = false
