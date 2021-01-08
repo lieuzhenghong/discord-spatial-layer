@@ -5,6 +5,7 @@ import MoveCommand from '../common/command/MoveCommand'
 import MessageCommand from '../common/command/MessageCommand'
 import FireCommand from '../common/command/FireCommand'
 import PIXIRenderer from './graphics/PIXIRenderer'
+import MoodCommand from '../common/command/MoodCommand'
 
 const ALLOW_ROTATION = false
 
@@ -70,6 +71,11 @@ class GameClient {
 
         if (input.mouseDown) {
             this.client.addCommand(new FireCommand(worldCoord.x, worldCoord.y))
+        }
+
+        /* Change Mood */
+        if (input.f2) {
+            this.client.addCommand(new MoodCommand("happy"))
         }
 
         this.input.releaseKeys()

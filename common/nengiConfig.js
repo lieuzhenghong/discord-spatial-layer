@@ -3,10 +3,12 @@ import nengi from 'nengi'
 import PlayerCharacter from './entity/PlayerCharacter'
 import Identity from './message/Identity'
 import DiscordMessageReceived from './message/DiscordMessageReceived'
+import PlayerMoodChanged from './message/PlayerMoodChanged'
 import WeaponFired from './message/WeaponFired'
 import MoveCommand from './command/MoveCommand'
 import FireCommand from './command/FireCommand'
 import MessageCommand from './command/MessageCommand'
+import MoodCommand from './command/MoodCommand'
 
 const config = {
     UPDATE_RATE: 20,
@@ -30,11 +32,13 @@ const config = {
             ['Identity', Identity],
             ['WeaponFired', WeaponFired],
             ['DiscordMessageReceived', DiscordMessageReceived],
+            ['PlayerMoodChanged', PlayerMoodChanged],
         ],
         commands: [
             ['MoveCommand', MoveCommand],
             ['FireCommand', FireCommand],
             ['MessageCommand', MessageCommand],
+            ['MoodCommand', MoodCommand],
         ],
         basics: [],
     },

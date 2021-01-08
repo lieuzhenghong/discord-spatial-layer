@@ -81,6 +81,9 @@ class PIXIRenderer {
             const entity = this.entities.get(65534)
             entity.showMessage(message.content)
         }
+        else if (message.protocol.name === 'PlayerMoodChanged') {
+            console.log("Player mood changed!", message.moodString)
+        }
     }
 
     deleteEntity(nid) {

@@ -68,6 +68,12 @@ class PlayerCharacter {
         this.moveDirection.y = unitY
     }
 
+    processMood(command) {
+        // TODO implement this
+        this.mood = command.mood
+        console.log("Mood has been changed!")
+    }
+
     move(delta) {
         this.x += this.moveDirection.x * this.speed * delta
         this.y += this.moveDirection.y * this.speed * delta
@@ -83,6 +89,7 @@ PlayerCharacter.protocol = {
     hitpoints: nengi.UInt8,
     name: nengi.String,
     message: nengi.String,
+    mood: nengi.String,
 }
 
 export default PlayerCharacter
