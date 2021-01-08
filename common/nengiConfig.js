@@ -6,6 +6,7 @@ import DiscordMessageReceived from './message/DiscordMessageReceived'
 import PlayerMoodChanged from './message/PlayerMoodChanged'
 import WeaponFired from './message/WeaponFired'
 import MoveCommand from './command/MoveCommand'
+import MoodCommand from './command/MoodCommand'
 import FireCommand from './command/FireCommand'
 
 const config = {
@@ -29,10 +30,11 @@ const config = {
             ['Identity', Identity],
             ['WeaponFired', WeaponFired],
             ['DiscordMessageReceived', DiscordMessageReceived],
-            ['PlayerMoodChanged', PlayerMoodChanged],
+            // ['PlayerMoodChanged', PlayerMoodChanged],
         ],
         commands: [
             ['MoveCommand', MoveCommand],
+            ['MoodCommand', MoodCommand],
             ['FireCommand', FireCommand],
         ],
         basics: [],

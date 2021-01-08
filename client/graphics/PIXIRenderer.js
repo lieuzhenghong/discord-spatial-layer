@@ -56,7 +56,6 @@ class PIXIRenderer {
         // create and add an entity to the renderer
         if (entity.protocol.name === 'PlayerCharacter') {
             const clientEntity = new PlayerCharacter(entity)
-            clientEntity.showMessage(entity.message)
             this.entities.set(entity.nid, clientEntity)
             this.middleground.addChild(clientEntity)
 
@@ -81,9 +80,9 @@ class PIXIRenderer {
             // TODO hard coding
             const entity = this.entities.get(65534)
             entity.showMessage(message.content)
-        }
-        else if (message.protocol.name === 'PlayerMoodChanged') {
+        } else if (message.protocol.name === 'PlayerMoodChanged') {
             console.log("Player mood changed!", message.moodString)
+            entity.processMood(message.moodString)
         }
     }
 

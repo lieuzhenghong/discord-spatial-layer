@@ -33,6 +33,7 @@ class PlayerCharacter extends PIXI.Container {
         super()
         this.x = entity.x
         this.y = entity.y
+        this.mood = "neutral"
 
         this.avatar = new PlayerAvatar()
 
@@ -71,6 +72,11 @@ class PlayerCharacter extends PIXI.Container {
 
     update(delta) {
         this.rotation = 0
+        if (this.mood == "neutral") {
+            console.log("is neutral")
+        } else {
+            console.log("not neutral")
+        }
     }
 }
 

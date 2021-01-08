@@ -7,6 +7,7 @@ class PlayerCharacter {
     constructor({ name }) {
         this.x = 0
         this.y = 0
+        this.mood = "neutral"
 
         this.moveDirection = {
             x: 0,
