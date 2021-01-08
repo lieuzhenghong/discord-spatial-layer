@@ -8,10 +8,11 @@ import PIXIRenderer from './graphics/PIXIRenderer'
 let ALLOW_ROTATION = false
 
 class GameClient {
-    constructor() {
+    constructor(secret) {
         this.client = new nengi.Client(nengiConfig)
         this.renderer = new PIXIRenderer()
         this.input = new InputSystem()
+        this.secret = { "fromClient": { "secret": secret } }
 
         this.client.onConnect(res => {
             console.log('onConnect response:', res)
@@ -21,7 +22,7 @@ class GameClient {
             console.log('connection closed')
         })
 
-        this.client.connect('ws://localhost:8079')
+        this.client.connect('ws://localhost:8079', this.secret)
     }
 
     update(delta, tick, now) {

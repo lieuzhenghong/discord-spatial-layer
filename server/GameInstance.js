@@ -17,8 +17,11 @@ class GameInstance {
         this.instance = new nengi.Instance(nengiConfig, { port: 8079 })
         this.globalChannel = this.instance.createChannel()
         this.instance.onConnect((client, clientData, callback) => {
+
+            if (!Object.keys(this.authDatabase).includes(clientData.fromClient.secret)) {
+                callback({ accepted: false, text: 'Secret not correct!' })
+            }
             this.globalChannel.subscribe(client)
-            //callback({ accepted: false, text: 'Connection denied.'})
 
             // create a entity for this client
             const entity = new PlayerCharacter()
@@ -47,6 +50,7 @@ class GameInstance {
             this.entities.set(entity.nid, entity)
 
             callback({ accepted: true, text: 'Welcome!' })
+
         })
 
         this.instance.onDisconnect(client => {

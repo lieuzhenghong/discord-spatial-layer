@@ -1,12 +1,14 @@
 
 import GameClient from './GameClient';
 
-window.onload = function() {
+window.onload = function () {
     console.log('window loaded')
-    const gameClient = new GameClient()
+
+    const secret = document.getElementById("secret_input").nodeValue
+    const gameClient = new GameClient(secret)
     let tick = 0
     let previous = performance.now()
-    const loop = function() {
+    const loop = function () {
         window.requestAnimationFrame(loop)
         const now = performance.now()
         const delta = (now - previous) / 1000
