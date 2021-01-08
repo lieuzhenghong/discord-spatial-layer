@@ -1,5 +1,6 @@
 import nengi from 'nengi'
 import nengiConfig from '../common/nengiConfig'
+import CONFIG from '../common/gameConfig'
 
 function instantiateClient(secret) {
     return new Promise((resolve, reject) => {
@@ -14,7 +15,7 @@ function instantiateClient(secret) {
             }
         })
 
-        client.connect('ws://localhost:8079', { secret })
+        client.connect(CONFIG.WEB_SOCKET, { secret })
     })
 }
 
