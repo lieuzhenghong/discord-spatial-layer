@@ -67,9 +67,13 @@ class GameInstance {
         if (msg.content.startsWith(prefix)) {
             const cmd = msg.content.slice(prefix.length)
             if (cmd === 'joinspace') {
-                const code = this.authDatabase.addUser(msg.member)
-                console.log(`code assigned: ${code}`)
-                msg.author.send(`Your entrance code is: ${code}`)
+                if (!msg.member) {
+                    msg.author.send('Command can only be used from a server.')
+                } else {
+                    const code = this.authDatabase.addUser(msg.member)
+                    console.log(`code assigned: ${code}`)
+                    msg.author.send(`Your entrance code is: ${code}`)
+                }
             }
             return
         }
