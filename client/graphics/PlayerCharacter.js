@@ -29,7 +29,6 @@ class PlayerCharacter extends PIXI.Container {
         this.x = entity.x
         this.y = entity.y
         this.mood = entity.mood
-        console.log("mood:", this.mood)
 
         this.avatar = new PlayerAvatar(0xff0000)
 
@@ -46,7 +45,7 @@ class PlayerCharacter extends PIXI.Container {
             wordWrap: true,
         })
         this.playerNameText = playerNameText
-        this.playerNameText.y = 25
+        this.playerNameText.y = CONFIG.PLAYER_DIAMETER / 2
         this.playerNameText.x = -playerNameText.width / 2
         this.addChild(this.playerNameText)
     }
@@ -56,6 +55,7 @@ class PlayerCharacter extends PIXI.Container {
 
         const messageCanvas = new PIXI.Text(msg, {
             fontFamily: 'Arial',
+            fontWeight: 'bold',
             fontSize: 15,
             fill: 0xffffff,
             align: 'center',
@@ -102,7 +102,6 @@ class PlayerCharacter extends PIXI.Container {
             sprite = new PIXI.Sprite.from(CONFIG.ANGRY_FACE);
         }
 
-        console.log(this.mood)
         sprite.width = 60
         sprite.height = 60
         sprite.anchor.set(0.5)

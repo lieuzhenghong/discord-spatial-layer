@@ -18,6 +18,7 @@ const config = {
     // Use this to randomly get a face from tile{number}.png
     EMOJI_TILE_MIN: 0,
     EMOJI_TILE_MAX: 135,
+    PLAYER_DIAMETER: 50,
 }
 
 export default config

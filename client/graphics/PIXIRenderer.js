@@ -78,7 +78,7 @@ class PIXIRenderer {
         } else if (message.protocol.name === 'DiscordMessageReceived') {
             console.log('rec mesage', message)
             const entity = this.entities.get(message.authorEntityNid)
-            entity.showMessage(message.content)
+            entity && entity.showMessage(message.content)
         } else if (message.protocol.name === 'PlayerMoodChanged') {
             console.log("Player mood changed!", message.moodString)
             entity.processMood(message.moodString)
