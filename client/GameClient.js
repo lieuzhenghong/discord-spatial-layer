@@ -72,8 +72,20 @@ class GameClient {
         }
 
         /* Change Mood */
+        if (input.f1) {
+            this.client.addCommand(new MoodCommand("neutral"))
+        }
         if (input.f2) {
             this.client.addCommand(new MoodCommand("happy"))
+        }
+        if (input.f3) {
+            this.client.addCommand(new MoodCommand("kissy"))
+        }
+        if (input.f4) {
+            this.client.addCommand(new MoodCommand("sad"))
+        }
+        if (input.f5) {
+            this.client.addCommand(new MoodCommand("angry"))
         }
 
         this.input.releaseKeys()

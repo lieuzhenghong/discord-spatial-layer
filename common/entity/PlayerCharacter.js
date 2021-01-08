@@ -62,9 +62,7 @@ class PlayerCharacter {
     }
 
     processMood(command) {
-        // TODO implement this
         this.mood = command.mood
-        console.log("Mood has been changed!")
     }
 
     move(delta) {

@@ -12,7 +12,11 @@ class InputSystem {
             mx: 0,
             my: 0,
             mouseDown: false,
+            f1: false,
             f2: false,
+            f3: false,
+            f4: false,
+            f5: false,
         }
 
         this.frameState = {
@@ -22,7 +26,11 @@ class InputSystem {
             d: false,
             r: false,
             mouseDown: false,
+            f1: false,
             f2: false,
+            f3: false,
+            f4: false,
+            f5: false,
         }
 
         // disable right click
@@ -50,10 +58,30 @@ class InputSystem {
                 this.currentState.d = true
                 this.frameState.d = true
             }
+            // F1
+            if (event.keyCode === 49) {
+                this.currentState.f1 = true
+                this.frameState.f1 = true
+            }
             // F2
-            if (event.keyCode === 113) {
+            if (event.keyCode === 50) {
                 this.currentState.f2 = true
                 this.frameState.f2 = true
+            }
+            // F3
+            if (event.keyCode === 51) {
+                this.currentState.f3 = true
+                this.frameState.f3 = true
+            }
+            // F4
+            if (event.keyCode === 52) {
+                this.currentState.f4 = true
+                this.frameState.f4 = true
+            }
+            // F5
+            if (event.keyCode === 53) {
+                this.currentState.f5 = true
+                this.frameState.f5 = true
             }
         })
 
@@ -71,8 +99,20 @@ class InputSystem {
             if (event.keyCode === 68 || event.keyCode === 39) {
                 this.currentState.d = false
             }
-            if (event.keyCode === 113) {
+            if (event.keyCode === 49) {
+                this.currentState.f1 = false
+            }
+            if (event.keyCode === 50) {
                 this.currentState.f2 = false
+            }
+            if (event.keyCode === 51) {
+                this.currentState.f3 = false
+            }
+            if (event.keyCode === 52) {
+                this.currentState.f4 = false
+            }
+            if (event.keyCode === 53) {
+                this.currentState.f5 = false
             }
         })
 
@@ -100,7 +140,11 @@ class InputSystem {
         this.frameState.s = this.currentState.s
         this.frameState.d = this.currentState.d
         this.frameState.r = this.currentState.r
+        this.frameState.f1 = this.currentState.f1
         this.frameState.f2 = this.currentState.f2
+        this.frameState.f3 = this.currentState.f3
+        this.frameState.f4 = this.currentState.f4
+        this.frameState.f5 = this.currentState.f5
         this.frameState.mouseDown = this.currentState.mouseDown
     }
 }

@@ -75,24 +75,28 @@ class PlayerCharacter extends PIXI.Container {
         // this.rotation = 0
         this.moodFace && this.removeChild(this.moodFace)
         // let playerNameText;
-        let sprite = new PIXI.Sprite.from('../../public/images/bg.png');
-        sprite.width = 200
-        sprite.height = 200
-        sprite.anchor.set(0.5)
-        /*
-        if (this.mood == "neutral") {
-            playerNameText = new PIXI.Text("neutral", {
-                fontFamily: 'Arial', fontSize: 15, fill: 0xffffff, align: 'center',
-            })
-        } else {
-            playerNameText = new PIXI.Text("happy", {
-                fontFamily: 'Arial', fontSize: 15, fill: 0xffffff, align: 'center',
-            })
+        let sprite;
+
+        if (this.mood === "neutral") {
+            sprite = new PIXI.Sprite.from(CONFIG.NEUTRAL_FACE);
         }
-        this.moodFace = playerNameText
-        this.moodFace.y = 25
-        this.moodFace.x = -25
-        */
+        else if (this.mood === "happy") {
+            sprite = new PIXI.Sprite.from(CONFIG.HAPPY_FACE);
+        }
+        else if (this.mood === "kissy") {
+            sprite = new PIXI.Sprite.from(CONFIG.KISSY_FACE);
+        }
+        else if (this.mood === "sad") {
+            sprite = new PIXI.Sprite.from(CONFIG.CRYING_FACE);
+        }
+        else if (this.mood === "angry") {
+            sprite = new PIXI.Sprite.from(CONFIG.ANGRY_FACE);
+        }
+
+        console.log(this.mood)
+        sprite.width = 60
+        sprite.height = 60
+        sprite.anchor.set(0.5)
         this.moodFace = sprite
         this.addChild(this.moodFace)
     }
