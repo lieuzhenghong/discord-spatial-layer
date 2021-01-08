@@ -18,6 +18,10 @@ class GameInstance {
         this.nids = new Map()
         if (process.env.NODE_ENV === 'development') this.authDatabase.addUserWithSecret({ displayName: 'joe' }, 'MAGIC_VALUE')
         this.instance.onConnect((client, clientData, callback) => {
+            this.authDatabase.registered.forEach((k) => {
+                console.log(k);
+            })
+            console.log(clientData.fromClient.secret);
             const { user } = this.authDatabase.getUser(clientData.fromClient.secret) || { user: undefined }
             if (!user) {
                 callback({ accepted: false, text: 'Secret not correct!' })
@@ -62,6 +66,7 @@ class GameInstance {
     }
 
     handleMessage(msg) {
+        console.log(JSON.stringify(msg));
         const prefix = '!'
         if (msg.author.bot) return
         if (msg.content.startsWith(prefix)) {
