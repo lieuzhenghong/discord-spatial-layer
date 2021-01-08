@@ -34,9 +34,11 @@ class InputSystem {
         }
 
         // disable right click
-        document.addEventListener('contextmenu', event => event.preventDefault())
+        this.listen('contextmenu', event => {
+            event.preventDefault()
+        });
 
-        document.addEventListener('keydown', event => {
+        this.listen('keydown', event => {
             // console.log('keydown', event)
             // w or up arrow
             if (event.keyCode === 87 || event.keyCode === 38) {
@@ -85,7 +87,7 @@ class InputSystem {
             }
         })
 
-        document.addEventListener('keyup', event => {
+        this.listen('keyup', event => {
             // console.log('keyup', event)
             if (event.keyCode === 87 || event.keyCode === 38) {
                 this.currentState.w = false
@@ -116,7 +118,7 @@ class InputSystem {
             }
         })
 
-        document.addEventListener('mousemove', event => {
+        this.listen('mousemove', event => {
             this.currentState.mx = event.clientX
             this.currentState.my = event.clientY
             if (this.onmousemove) {
@@ -124,13 +126,24 @@ class InputSystem {
             }
         })
 
-        document.addEventListener('pointerdown', event => {
+        this.listen('pointerdown', event => {
             this.currentState.mouseDown = true
             this.frameState.mouseDown = true
         })
 
-        document.addEventListener('mouseup', event => {
+        this.listen('mouseup', event => {
             this.currentState.mouseDown = false
+        })
+    }
+
+    listen(event, callback) {
+        document.addEventListener(event, (event) => {
+            const id = event.target.getAttribute('id');
+            if (id !== "main-canvas") {
+                return event;
+            }
+
+            callback(event);
         })
     }
 
