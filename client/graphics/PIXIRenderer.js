@@ -31,6 +31,14 @@ class PIXIRenderer {
         this.camera.addChild(this.foreground)
         this.stage.addChild(this.camera)
 
+        const texture = PIXI.Texture.from('./images/bg.png')
+        const tilingSprite = new PIXI.TilingSprite(
+            texture,
+            this.renderer.width,
+            this.renderer.height,
+        )
+        this.stage.addChild(tilingSprite)
+
         this.background.addChild(new BackgroundGrid())
 
         window.addEventListener('resize', () => {
