@@ -12,7 +12,6 @@ import Discord from 'discord.js';
 class GameInstance {
     constructor() {
         this.entities = new Map()
-        this.discordMessages = ['its the theme song'] // TODO should this be some sort of queue/window?
         this.collisionSystem = new CollisionSystem()
         this.instance = new nengi.Instance(nengiConfig, { port: 8079 })
         this.globalChannel = this.instance.createChannel()
@@ -26,9 +25,6 @@ class GameInstance {
 
             // tell the client which entity it controls (the client will use this to follow it with the camera)
             this.instance.message(new Identity(entity.nid), client)
-            this.discordMessages.forEach(
-                discordMessage => this.instance.message(new DiscordMessageReceived(discordMessage), client),
-            )
 
             entity.x = Math.random() * 1000
             entity.y = Math.random() * 1000
@@ -83,7 +79,7 @@ class GameInstance {
         // DO this for each client
         bot.on('message', msg => {
             console.log(msg)
-            this.globalChannel.addMessage(new DiscordMessageReceived(msg.content))
+            this.globalChannel.addMessage(new DiscordMessageReceived(msg))
         });
 
         bot.login(process.env.DISCORD_TOKEN);
