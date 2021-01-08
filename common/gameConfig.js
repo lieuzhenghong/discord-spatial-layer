@@ -8,6 +8,16 @@ const config = {
     PLAYER_CHAT_TIMEOUT: 5000, // 5s
 
     MAP_IMAGE: './images/bg.png',
+
+    NEUTRAL_FACE: './images/tile001.png',
+    HAPPY_FACE: './images/tile002.png',
+    KISSY_FACE: './images/til020.png',
+    CRYING_FACE: './images/tile079.png',
+    ANGRY_FACE: './images/tile089.png',
+
+    // Use this to randomly get a face from tile{number}.png
+    EMOJI_TILE_MIN = 0,
+    EMOJI_TILE_MAX = 135,
 }
 
 export default config
