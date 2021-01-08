@@ -9,9 +9,9 @@ const config = {
 
     MAP_IMAGE: './images/bg.png',
 
-    NEUTRAL_FACE: './images/tile001.png',
+    NEUTRAL_FACE: './images/tile000.png',
     HAPPY_FACE: './images/tile002.png',
-    KISSY_FACE: './images/til020.png',
+    KISSY_FACE: './images/tile020.png',
     CRYING_FACE: './images/tile079.png',
     ANGRY_FACE: './images/tile089.png',
 
