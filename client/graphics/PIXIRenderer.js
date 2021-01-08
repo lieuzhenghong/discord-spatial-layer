@@ -142,12 +142,11 @@ class PIXIRenderer {
     }
 
     update(delta) {
-        /*
         // if we had draw logic (animations) for each entity...
+        // we do
         this.entities.forEach(entity => {
             entity.update(delta)
         })
-        */
 
         if (this.myEntity) {
             // this.centerCamera(this.myEntity)

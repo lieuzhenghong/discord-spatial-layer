@@ -33,7 +33,8 @@ class PlayerCharacter extends PIXI.Container {
         super()
         this.x = entity.x
         this.y = entity.y
-        this.mood = "neutral"
+        this.mood = entity.mood
+        console.log("mood:", this.mood)
 
         this.avatar = new PlayerAvatar()
 
@@ -71,12 +72,22 @@ class PlayerCharacter extends PIXI.Container {
     }
 
     update(delta) {
-        this.rotation = 0
+        // this.rotation = 0
+        this.moodFace && this.removeChild(this.moodFace)
+        let playerNameText;
         if (this.mood == "neutral") {
-            console.log("is neutral")
+            playerNameText = new PIXI.Text(name, {
+                fontFamily: 'Arial', fontSize: 15, fill: 0xffffff, align: 'center',
+            })
         } else {
-            console.log("not neutral")
+            playerNameText = new PIXI.Text(name, {
+                fontFamily: 'Arial', fontSize: 15, fill: 0xffffff, align: 'center',
+            })
         }
+        this.moodFace = playerNameText
+        this.moodFace.y = 25
+        this.moodFace.x = -25
+        this.addChild(this.moodFace)
     }
 }
 
