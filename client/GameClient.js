@@ -2,10 +2,11 @@ import nengi from 'nengi'
 import nengiConfig from '../common/nengiConfig'
 import InputSystem from './InputSystem'
 import MoveCommand from '../common/command/MoveCommand'
+import MessageCommand from '../common/command/MessageCommand'
 import FireCommand from '../common/command/FireCommand'
 import PIXIRenderer from './graphics/PIXIRenderer'
 
-let ALLOW_ROTATION = false
+let ALLOW_ROTATION = true
 
 class GameClient {
     constructor() {
@@ -68,6 +69,11 @@ class GameClient {
 
         if (input.mouseDown) {
             this.client.addCommand(new FireCommand(worldCoord.x, worldCoord.y))
+        }
+
+        if (input.mouseDown) {
+            this.client.addCommand(new MessageCommand("lol"))
+            console.log("fff")
         }
 
         this.input.releaseKeys()

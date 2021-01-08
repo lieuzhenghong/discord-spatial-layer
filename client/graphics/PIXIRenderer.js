@@ -1,6 +1,5 @@
 import * as PIXI from 'pixi.js'
 import PlayerCharacter from './PlayerCharacter'
-import GreenCircle from './GreenCircle'
 import BackgroundGrid from './BackgroundGrid'
 
 class PIXIRenderer {
@@ -13,8 +12,8 @@ class PIXIRenderer {
         this.entities = new Map()
 
         this.renderer = PIXI.autoDetectRenderer({
-            width :window.innerWidth, 
-            height: window.innerHeight, 
+            width :window.innerWidth,
+            height: window.innerHeight,
             view: this.canvas,
             antialiasing: false,
             transparent: false,
@@ -36,7 +35,7 @@ class PIXIRenderer {
 
         window.addEventListener('resize', () => {
             this.resize()
-        })  
+        })
     }
 
     resize() {
@@ -47,6 +46,7 @@ class PIXIRenderer {
         // create and add an entity to the renderer
         if (entity.protocol.name === 'PlayerCharacter') {
             const clientEntity = new PlayerCharacter(entity)
+            clientEntity.showMessage(entity.message)
             this.entities.set(entity.nid, clientEntity)
             this.middleground.addChild(clientEntity)
 
@@ -55,17 +55,15 @@ class PIXIRenderer {
                 this.myEntity = clientEntity
             }
         }
-
-        if (entity.protocol.name === 'GreenCircle') {
-            const clientEntity = new GreenCircle(entity)
-            this.entities.set(entity.nid, clientEntity)
-            this.middleground.addChild(clientEntity)
-        }
     }
 
     updateEntity(update) {
         const entity = this.entities.get(update.nid)
-        entity[update.prop] = update.value
+        if (update.prop == "message") {
+            entity.showMessage(update.value)
+        } else {
+            entity[update.prop] = update.value
+        }
     }
 
     processMessage(message) {
@@ -95,7 +93,7 @@ class PIXIRenderer {
     drawHitscan(x, y, targetX, targetY, color) {
         // draws a debug line showing a shot
         const graphics = new PIXI.Graphics()
-        graphics.lineStyle(1, color)
+        graphics.lineStyle(10, color)
         graphics.moveTo(x, y)
         graphics.lineTo(targetX, targetY)
         this.foreground.addChild(graphics)

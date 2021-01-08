@@ -6,7 +6,6 @@ class PlayerCharacter {
     constructor() {
         this.x = 0
         this.y = 0
-        this.rotation = 0
         this.isAlive = true
 
 
@@ -16,6 +15,10 @@ class PlayerCharacter {
         }
 
         this.speed = 400
+
+        this.name = "weineng"
+
+        this.rotation = 0
 
         this.weaponSystem = new WeaponSystem()
 
@@ -30,6 +33,13 @@ class PlayerCharacter {
         return this.weaponSystem.fire()
     }
 
+    processChatMessage(command) {
+        this.message = command.msg
+        setTimeout(() => {
+            this.message = ""
+        }, 5000)
+    }
+
     processMove(command) {
         if (!this.isAlive) {
             return
@@ -41,10 +51,20 @@ class PlayerCharacter {
         let unitY = 0
 
         // create forces from input
-        if (command.forward) { unitY -= 1 }
-        if (command.backward) { unitY += 1 }
-        if (command.left) { unitX -= 1 }
-        if (command.right) { unitX += 1 }
+        if (command.forward) {
+            unitY -= 1
+        }
+        if (command.backward) {
+            unitY += 1
+        }
+
+        if (command.left) {
+            unitX -= 1
+        }
+
+        if (command.right) {
+            unitX += 1
+        }
 
         // normalize
         const len = Math.sqrt(unitX * unitX + unitY * unitY)
@@ -55,8 +75,6 @@ class PlayerCharacter {
 
         this.moveDirection.x = unitX
         this.moveDirection.y = unitY
-
-
     }
 
     move(delta) {
@@ -71,9 +89,10 @@ class PlayerCharacter {
 PlayerCharacter.protocol = {
     x: { type: nengi.Float32, interp: true },
     y: { type: nengi.Float32, interp: true },
-    rotation: { type: nengi.RotationFloat32, interp: true },
     isAlive: nengi.Boolean,
-    hitpoints: nengi.UInt8
+    hitpoints: nengi.UInt8,
+    name: nengi.String,
+    message: nengi.String
 }
 
 export default PlayerCharacter

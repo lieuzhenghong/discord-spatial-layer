@@ -1,7 +1,6 @@
 import nengi from 'nengi'
 import nengiConfig from '../common/nengiConfig'
 import PlayerCharacter from '../common/entity/PlayerCharacter'
-import GreenCircle from '../common/entity/GreenCircle'
 import Identity from '../common/message/Identity'
 import DiscordMessageReceived from '../common/message/DiscordMessageReceived'
 import WeaponFired from '../common/message/WeaponFired'
@@ -51,11 +50,6 @@ class GameInstance {
             this.instance.removeEntity(client.entity)
         })
 
-
-        for (var i = 0; i < 0; i++) {
-            this.spawnGreenCircle()
-        }
-
         this.registerDiscordClient()
     }
 
@@ -85,17 +79,6 @@ class GameInstance {
         bot.login(process.env.DISCORD_TOKEN);
     }
 
-
-    spawnGreenCircle() {
-        const green = new GreenCircle(
-            Math.random() * 1000,
-            Math.random() * 1000
-        )
-        // Order is important for the next two lines
-        this.instance.addEntity(green) // assigns an `nid` to green
-        this.entities.set(green.nid, green) // uses the `nid` as a key
-    }
-
     update(delta) {
         //console.log('stats', this.entities.size, this.instance.clients.toArray().length, this.instance.entities.toArray().length)
         this.acc += delta
@@ -113,6 +96,10 @@ class GameInstance {
                     entity.processMove(command)
                 }
 
+                if (command.protocol.name === 'MessageCommand') {
+                    entity.processChatMessage(command)
+                }
+
                 if (command.protocol.name === 'FireCommand') {
                     if (entity.fire()) {
 
@@ -128,18 +115,6 @@ class GameInstance {
                 }
             }
         }
-
-        this.entities.forEach(entity => {
-            if (entity instanceof GreenCircle) {
-                if (!entity.isAlive) {
-                    // Order matters for the next 2 lines
-                    this.entities.delete(entity.nid)
-                    this.instance.removeEntity(entity)
-                    // respawn after one second
-                    setTimeout(() => { this.spawnGreenCircle() }, 1000)
-                }
-            }
-        })
 
         // TODO: the rest of the game logic
         this.instance.clients.forEach(client => {
