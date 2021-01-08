@@ -12,13 +12,11 @@ class PlayerAvatar extends PIXI.Container {
         this.body.tint = skin_rgb
 
         this.hat = new PIXI.Graphics()
-        // this.hat.beginFill('0x'+Math.random().toString(16).substr(2,6))
-        this.hat.moveTo(0, -25)
-        this.hat.lineTo(70, 0)
-        this.hat.lineTo(0, 25)
+        this.hat.beginFill('0x'+Math.random().toString(16).substr(2,6))
+        this.hat.moveTo(25, 0)
+        this.hat.lineTo(0, -70)
+        this.hat.lineTo(-25, 0)
         this.hat.endFill()
-
-        // To point the hat to the top.
 
         this.addChild(this.hat)
         this.addChild(this.body)
@@ -49,7 +47,7 @@ class PlayerCharacter extends PIXI.Container {
         })
         this.playerNameText = playerNameText
         this.playerNameText.y = 25
-        this.playerNameText.x = -25
+        this.playerNameText.x = -playerNameText.width / 2
         this.addChild(this.playerNameText)
     }
 
