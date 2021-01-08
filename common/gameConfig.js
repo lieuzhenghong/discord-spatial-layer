@@ -16,8 +16,8 @@ const config = {
     ANGRY_FACE: './images/tile089.png',
 
     // Use this to randomly get a face from tile{number}.png
-    EMOJI_TILE_MIN = 0,
-    EMOJI_TILE_MAX = 135,
+    EMOJI_TILE_MIN: 0,
+    EMOJI_TILE_MAX: 135,
 }
 
 export default config
