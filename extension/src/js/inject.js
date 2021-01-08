@@ -1,7 +1,6 @@
-import * as PIXI from 'pixi.js';
+import nengiConfig from '../../../common/nengiConfig';
 
-console.log(PIXI);
-
+console.log(nengiConfig);
 const SECRET_KEY_FORM_ID = 'secret-key-form';
 
 (function() {

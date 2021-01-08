@@ -1,3 +1,5 @@
+const glob = require('glob');
+
 var webpack = require("webpack"),
     path = require("path"),
     fileSystem = require("fs"),
@@ -23,7 +25,8 @@ var options = {
   entry: {
     // popup: path.join(__dirname, "src", "js", "popup.js"),
     inject: path.join(__dirname, "src", "js", "inject.js"),
-    background: path.join(__dirname, "src", "js", "background.js")
+    background: path.join(__dirname, "src", "js", "background.js"),
+    common: glob.sync(path.join(__dirname, "../common/**/*.js*"))
   },
   output: {
     path: path.join(__dirname, "build"),

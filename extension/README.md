@@ -1,3 +1,6 @@
+NOTE: Importing from ../common/* will end up in the server's node_modules being bundled as part of the bundle, not the extension folder's node_modules.
+
+
 # Chrome Extension Webpack Boilerplate
 
 A basic foundation boilerplate for rich Chrome Extensions using [Webpack](https://webpack.github.io/) to help you write modular and modern Javascript code, load CSS easily and [automatic reload the browser on code changes](https://webpack.github.io/docs/webpack-dev-server.html#automatic-refresh).
