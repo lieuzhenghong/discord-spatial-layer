@@ -30,7 +30,7 @@ class PlayerCharacter extends PIXI.Container {
         this.y = entity.y
         this.mood = entity.mood
 
-        this.avatar = new PlayerAvatar(entity.skin_color), entity.hat_color)
+        this.avatar = new PlayerAvatar(entity.skin_color, entity.hat_color)
 
         this.addChild(this.avatar)
 
