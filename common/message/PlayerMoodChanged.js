@@ -7,7 +7,7 @@ class PlayerMoodChanged {
 }
 
 PlayerMoodChanged.protocol = {
-    moodString: nengi.String
+    moodString: nengi.String,
 }
 
 export default PlayerMoodChanged

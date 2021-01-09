@@ -18,9 +18,8 @@ let container;
     container.style.top = '60%'
     container.style.backgroundColor = 'white'
 
-    const ui = new UI(container);
-    ui.start();
+    const ui = new UI(container)
+    ui.start()
 
     body.appendChild(container)
-
 }())

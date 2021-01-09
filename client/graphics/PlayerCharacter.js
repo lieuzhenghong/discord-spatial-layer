@@ -12,7 +12,7 @@ class PlayerAvatar extends PIXI.Container {
         this.body.tint = skin_rgb
 
         this.hat = new PIXI.Graphics()
-        this.hat.beginFill('0x'+Math.random().toString(16).substr(2,6))
+        this.hat.beginFill(`0x${Math.random().toString(16).substr(2, 6)}`)
         this.hat.moveTo(25, 0)
         this.hat.lineTo(0, -70)
         this.hat.lineTo(-25, 0)
@@ -82,22 +82,18 @@ class PlayerCharacter extends PIXI.Container {
 
     update(delta) {
         this.moodFace && this.removeChild(this.moodFace)
-        let sprite;
+        let sprite
 
-        if (this.mood === "neutral") {
-            sprite = new PIXI.Sprite.from(CONFIG.NEUTRAL_FACE);
-        }
-        else if (this.mood === "happy") {
-            sprite = new PIXI.Sprite.from(CONFIG.HAPPY_FACE);
-        }
-        else if (this.mood === "kissy") {
-            sprite = new PIXI.Sprite.from(CONFIG.KISSY_FACE);
-        }
-        else if (this.mood === "sad") {
-            sprite = new PIXI.Sprite.from(CONFIG.CRYING_FACE);
-        }
-        else if (this.mood === "angry") {
-            sprite = new PIXI.Sprite.from(CONFIG.ANGRY_FACE);
+        if (this.mood === 'neutral') {
+            sprite = new PIXI.Sprite.from(CONFIG.NEUTRAL_FACE)
+        } else if (this.mood === 'happy') {
+            sprite = new PIXI.Sprite.from(CONFIG.HAPPY_FACE)
+        } else if (this.mood === 'kissy') {
+            sprite = new PIXI.Sprite.from(CONFIG.KISSY_FACE)
+        } else if (this.mood === 'sad') {
+            sprite = new PIXI.Sprite.from(CONFIG.CRYING_FACE)
+        } else if (this.mood === 'angry') {
+            sprite = new PIXI.Sprite.from(CONFIG.ANGRY_FACE)
         }
 
         sprite.width = 60

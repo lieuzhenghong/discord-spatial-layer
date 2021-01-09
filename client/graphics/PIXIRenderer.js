@@ -82,7 +82,7 @@ class PIXIRenderer {
             const entity = this.entities.get(message.authorEntityNid)
             entity && entity.showMessage(message.content)
         } else if (message.protocol.name === 'PlayerMoodChanged') {
-            console.log("Player mood changed!", message.moodString)
+            console.log('Player mood changed!', message.moodString)
             entity.processMood(message.moodString)
         }
     }

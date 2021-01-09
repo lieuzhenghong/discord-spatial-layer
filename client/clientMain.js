@@ -1,4 +1,4 @@
-import UI from './runClient';
+import UI from './runClient'
 
 window.onload = function () {
     const container = document.getElementById('container')
@@ -6,6 +6,6 @@ window.onload = function () {
     container.style.width = '100%'
     container.style.position = 'absolute'
 
-    const ui = new UI(container);
-    ui.start();
+    const ui = new UI(container)
+    ui.start()
 }

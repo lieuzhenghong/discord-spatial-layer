@@ -36,7 +36,7 @@ class InputSystem {
         // disable right click
         this.listen('contextmenu', event => {
             event.preventDefault()
-        });
+        })
 
         this.listen('keydown', event => {
             // console.log('keydown', event)
@@ -137,13 +137,13 @@ class InputSystem {
     }
 
     listen(event, callback) {
-        document.addEventListener(event, (event) => {
-            const id = event.target.getAttribute('id');
-            if (id !== "main-canvas") {
-                return event;
+        document.addEventListener(event, event => {
+            const id = event.target.getAttribute('id')
+            if (id !== 'main-canvas') {
+                return event
             }
 
-            callback(event);
+            callback(event)
         })
     }
 

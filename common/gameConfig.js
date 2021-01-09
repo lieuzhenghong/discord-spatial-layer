@@ -1,5 +1,5 @@
 // TODO REPO MAY CHANGE!
-const REPO = "https://raw.githubusercontent.com/juxd/discord-spatial-layer/master/public/"
+const REPO = 'https://raw.githubusercontent.com/juxd/discord-spatial-layer/master/public/'
 
 const config = {
     UPDATE_RATE: 20,
@@ -12,13 +12,13 @@ const config = {
 
     WEB_SOCKET: 'ws://104.248.157.227:8079',
 
-    MAP_IMAGE: REPO + 'images/bg.png',
+    MAP_IMAGE: `${REPO}images/bg.png`,
 
-    NEUTRAL_FACE: REPO +'images/tile000.png',
-    HAPPY_FACE: REPO + 'images/tile002.png',
-    KISSY_FACE: REPO + 'images/tile020.png',
-    CRYING_FACE: REPO + 'images/tile079.png',
-    ANGRY_FACE: REPO + 'images/tile089.png',
+    NEUTRAL_FACE: `${REPO}images/tile000.png`,
+    HAPPY_FACE: `${REPO}images/tile002.png`,
+    KISSY_FACE: `${REPO}images/tile020.png`,
+    CRYING_FACE: `${REPO}images/tile079.png`,
+    ANGRY_FACE: `${REPO}images/tile089.png`,
 
     // Use this to randomly get a face from tile{number}.png
     EMOJI_TILE_MIN: 0,

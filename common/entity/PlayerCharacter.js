@@ -7,7 +7,7 @@ class PlayerCharacter {
     constructor({ name }) {
         this.x = 0
         this.y = 0
-        this.mood = "neutral"
+        this.mood = 'neutral'
 
         this.moveDirection = {
             x: 0,
@@ -67,12 +67,12 @@ class PlayerCharacter {
 
     move(delta) {
         this.x += this.moveDirection.x * this.speed * delta
-        this.x = Math.max(CONFIG.PLAYER_DIAMETER/2, this.x)
-        this.x = Math.min(CONFIG.MAP_X - CONFIG.PLAYER_DIAMETER/2, this.x)
+        this.x = Math.max(CONFIG.PLAYER_DIAMETER / 2, this.x)
+        this.x = Math.min(CONFIG.MAP_X - CONFIG.PLAYER_DIAMETER / 2, this.x)
 
         this.y += this.moveDirection.y * this.speed * delta
-        this.y = Math.max(CONFIG.PLAYER_DIAMETER/2, this.y)
-        this.y = Math.min(CONFIG.MAP_Y - CONFIG.PLAYER_DIAMETER/2, this.y)
+        this.y = Math.max(CONFIG.PLAYER_DIAMETER / 2, this.y)
+        this.y = Math.min(CONFIG.MAP_Y - CONFIG.PLAYER_DIAMETER / 2, this.y)
 
         this.collider.pos.x = this.x
         this.collider.pos.y = this.y
