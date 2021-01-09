@@ -9,10 +9,10 @@ class PlayerAvatar extends PIXI.Container {
         this.body.beginFill(0xffffff)
         this.body.drawCircle(0, 0, 25)
         this.body.endFill()
-        this.body.tint = skin_rgb
+        this.body.tint = skin_rgb || `0x${Math.random().toString(16).substr(2, 6)}`
 
         this.hat = new PIXI.Graphics()
-        this.hat.beginFill(hat_color)
+        this.hat.beginFill(hat_color || `0x${Math.random().toString(16).substr(2, 6)}`)
         this.hat.moveTo(25, 0)
         this.hat.lineTo(0, -70)
         this.hat.lineTo(-25, 0)
