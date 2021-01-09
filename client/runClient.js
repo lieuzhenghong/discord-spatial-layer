@@ -37,6 +37,12 @@ class UI {
         const secretKey = document.getElementById('secret-key').value
 
         instantiateClient(secretKey)
+            .catch(err => {
+                console.log(`error: ${err}`)
+                alert(`Connection denied.
+    Please check that WebSocket connection is working and your secret key is correct
+    `)
+            })
             .then(client => {
                 console.log('success')
                 const canvas = '<canvas id=\'main-canvas\' style="height: 100%; width: 100%" tabindex="1"></canvas>'
@@ -60,9 +66,7 @@ class UI {
             })
             .catch(err => {
                 console.log(`error: ${err}`)
-                alert(`Connection denied.
-Please check that WebSocket connection is working and your secret key is correct
-`)
+                alert('Error in the game client / run loop. Please check the logs.');
             })
     }
 }
